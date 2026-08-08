@@ -1,5 +1,5 @@
-/* 취사병 완성작전 — 오프라인 캐시 서비스워커 */
-const CACHE = 'study-quest-v2';
+/* 한윤재 완성작전 — 오프라인 캐시 서비스워커 */
+const CACHE = 'study-quest-v3';
 const ASSETS = [
   './',
   'index.html',

@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="완성작전">
 <meta name="mobile-web-app-capable" content="yes">
-<title>중1 1학기 완성 작전 · 취사병 전설이 되다</title>
+<title>중1 1학기 완성 작전 · 한윤재 전설이 되다</title>
 <style>
   :root {
     --paper: #F3EEDF; --paper-2: #EAE2CD; --ink: #23261C; --ink-soft: #4C503E;
@@ -171,7 +171,9 @@
   .modal-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 4px; }
   .modal-tag { font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: var(--flame); }
   .modal h3 { font-size: 18px; font-weight: 900; margin: 2px 0 0; }
-  .modal .rule { font-size: 12.5px; color: var(--ink-soft); font-weight: 700; margin: 6px 0 14px; }
+  .modal .rule { font-size: 12.5px; color: var(--ink-soft); font-weight: 700; margin: 6px 0 8px; }
+  .modal .warn { font-size: 12.5px; font-weight: 800; color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, transparent); border: 1.5px solid color-mix(in srgb, var(--bad) 35%, var(--line)); border-radius: 10px; padding: 9px 12px; margin: 0 0 14px; }
+  .submit.watch { background: var(--flame); text-decoration: none; display: inline-flex; align-items: center; }
   .close-x { margin-left: auto; font: inherit; font-size: 20px; line-height: 1; cursor: pointer; background: none; border: none; color: var(--ink-faint); padding: 2px 6px; }
   .qz { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; background: var(--paper-2); }
   .qz-q { font-weight: 800; font-size: 14.5px; margin-bottom: 9px; }
@@ -225,15 +227,15 @@
       <div class="hud-top">
         <div>
           <span class="plan-tag">중1 1학기 · 14일 완성 작전</span>
-          <h1>취사병 <span class="flame">전설</span>이 되다</h1>
+          <h1>한윤재 <span class="flame">전설</span>이 되다</h1>
           <p class="subtitle">
-            <span class="namebox"><span class="name" id="playerName" contenteditable="true" spellcheck="false">우리 아들</span> 취사병</span>의 국어·과학·사회 1학기 완성표 —
+            <span class="namebox"><span class="name" id="playerName" contenteditable="true" spellcheck="false">우리 아들</span> 한윤재</span>의 국어·과학·사회 1학기 완성표 —
             매일 영상 보고 <b style="color:var(--good)">완료 체크</b>, 단원 끝엔 <b style="color:var(--flame)">확인문제</b>로 복습! 용돈 모아 자전거 사기 🚲
           </p>
         </div>
         <div class="rankbadge">
           <div class="rank-emblem"><span id="rankIco">🥄</span><span class="lv" id="rankLv">Lv.1</span></div>
-          <div class="rank-name" id="rankName">이등병 취사병</div>
+          <div class="rank-name" id="rankName">이등병 한윤재</div>
         </div>
       </div>
       <div class="stats">
@@ -278,12 +280,12 @@
   "use strict";
 
   var RANKS = [
-    { min:0,  ico:"🥄", name:"이등병 취사병" },
-    { min:8,  ico:"🍳", name:"일병 취사병" },
-    { min:16, ico:"🔪", name:"상병 취사병" },
-    { min:24, ico:"🍲", name:"병장 취사병" },
+    { min:0,  ico:"🥄", name:"이등병 한윤재" },
+    { min:8,  ico:"🍳", name:"일병 한윤재" },
+    { min:16, ico:"🔪", name:"상병 한윤재" },
+    { min:24, ico:"🍲", name:"병장 한윤재" },
     { min:33, ico:"👨‍🍳", name:"취사반장" },
-    { min:42, ico:"🏆", name:"전설의 취사병" }
+    { min:42, ico:"🏆", name:"전설의 한윤재" }
   ];
 
   // color palette for unit chips
@@ -920,7 +922,7 @@
       if (d.quiz) {
         var qid = sub.key + "-q" + d.n;
         d.quizId = qid;
-        QUIZ[qid] = { title: sub.name + " · " + d.unit + (d.quiz.kind==="mock"?" 모의테스트":" 확인문제"), kind: d.quiz.kind, z: d.quiz.z };
+        QUIZ[qid] = { title: sub.name + " · " + d.unit + (d.quiz.kind==="mock"?" 모의테스트":" 확인문제"), kind: d.quiz.kind, z: d.quiz.z, yt: ytHref(sub, d) };
         if (d.quiz.kind==="mock") mockQuizIds.push(qid); else unitQuizIds.push(qid);
       }
     });
@@ -1014,6 +1016,10 @@
     rule.textContent = "합격선 80점 — 총 " + Q.z.length + "문제 중 " + need + "개 이상 맞히면 통과! (" + rew + "元) · 채점하면 정답이 표시돼요.";
     wrap.appendChild(rule);
 
+    var warn = document.createElement("div"); warn.className = "warn";
+    warn.textContent = "⚠️ 80점 미만이면 통과되지 않아요! 그러면 영상(유튜브)부터 다시 보고 도전해야 해요.";
+    wrap.appendChild(warn);
+
     Q.z.forEach(function (row, qi) {
       var box = document.createElement("div"); box.className="qz"; box.dataset.ans=row[2];
       var qh = document.createElement("div"); qh.className="qz-q";
@@ -1067,12 +1073,14 @@
         if (first) setTimeout(function(){ showToast((score===100?"⭐ 만점 통과!  ":"확인문제 통과!  ") + "+" + rew + "元"); }, 220);
       } else {
         res.className="result fail";
-        res.textContent = "통과 실패 · " + score + "점 (합격 80점). 정답 확인하고 다시 도전!";
-        var retry = document.createElement("button"); retry.className="submit"; retry.textContent="다시 도전";
+        res.textContent = "통과 실패 · " + score + "점 (합격 80점). 영상부터 다시 보고 도전하세요!";
+        var watch = document.createElement("a"); watch.className="submit watch"; watch.textContent="📺 영상 다시 보기";
+        watch.href = Q.yt || "#"; watch.target="_blank"; watch.rel="noopener";
+        var retry = document.createElement("button"); retry.className="submit"; retry.textContent="다시 도전"; retry.style.background="var(--olive)";
         retry.addEventListener("click", function(){ closeQuiz(); openQuiz(qid); });
         var cl = document.createElement("button"); cl.className="submit"; cl.textContent="닫기"; cl.style.background="var(--ink-faint)";
         cl.addEventListener("click", function(){ closeQuiz(); });
-        foot.appendChild(retry); foot.appendChild(cl);
+        foot.appendChild(watch); foot.appendChild(retry); foot.appendChild(cl);
       }
     });
 
