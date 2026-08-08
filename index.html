@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="중1 1학기 국어·과학·사회 14일 완성표 — 유튜브로 배우고 확인문제로 복습, 용돈 모아 자전거 사기.">
+<meta name="theme-color" content="#6E7B45" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12140B" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="완성작전">
+<meta name="mobile-web-app-capable" content="yes">
+<title>중1 1학기 완성 작전 · 취사병 전설이 되다</title>
+<style>
+  :root {
+    --paper: #F3EEDF; --paper-2: #EAE2CD; --ink: #23261C; --ink-soft: #4C503E;
+    --ink-faint: #7A7C68; --line: #D6CCB0; --card: #FBF8EF; --flame: #EA5D24;
+    --flame-deep: #C7481A; --gold: #C8962B; --gold-bright: #E6B23E; --olive: #6E7B45;
+    --olive-deep: #55602F; --good: #4E7A3E; --bad: #C24A38; --ground: #F3EEDF;
+    --shadow: 0 1px 2px rgba(35,38,28,.08), 0 8px 24px rgba(35,38,28,.06); --stamp: rgba(199,72,26,.9);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #17190F; --paper-2: #1E2115; --ink: #ECE7D4; --ink-soft: #BEB9A2;
+      --ink-faint: #8A8770; --line: #34381F; --card: #202315; --flame: #F4732F;
+      --flame-deep: #E05A1D; --gold: #E6B23E; --gold-bright: #F5C960; --olive: #8A9857;
+      --olive-deep: #6E7B45; --good: #74A85E; --bad: #E27060; --ground: #12140B;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35); --stamp: rgba(244,115,47,.92);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #F3EEDF; --paper-2: #EAE2CD; --ink: #23261C; --ink-soft: #4C503E;
+    --ink-faint: #7A7C68; --line: #D6CCB0; --card: #FBF8EF; --flame: #EA5D24;
+    --flame-deep: #C7481A; --gold: #C8962B; --gold-bright: #E6B23E; --olive: #6E7B45;
+    --olive-deep: #55602F; --good: #4E7A3E; --bad: #C24A38; --ground: #F3EEDF;
+    --shadow: 0 1px 2px rgba(35,38,28,.08), 0 8px 24px rgba(35,38,28,.06); --stamp: rgba(199,72,26,.9);
+  }
+  :root[data-theme="dark"] {
+    --paper: #17190F; --paper-2: #1E2115; --ink: #ECE7D4; --ink-soft: #BEB9A2;
+    --ink-faint: #8A8770; --line: #34381F; --card: #202315; --flame: #F4732F;
+    --flame-deep: #E05A1D; --gold: #E6B23E; --gold-bright: #F5C960; --olive: #8A9857;
+    --olive-deep: #6E7B45; --good: #74A85E; --bad: #E27060; --ground: #12140B;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35); --stamp: rgba(244,115,47,.92);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .wrap {
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", system-ui, sans-serif;
+    color: var(--ink);
+    background: radial-gradient(1100px 460px at 50% -10%, color-mix(in srgb, var(--olive) 13%, transparent), transparent 60%), var(--ground);
+    min-height: 100vh; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 940px; margin: 0 auto; padding: 22px 16px 90px; }
+  .label { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
+  .tabnum { font-variant-numeric: tabular-nums; }
+
+  /* BIKE GOAL */
+  .goal { background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 16%, var(--card)), var(--card) 60%); border: 2px solid color-mix(in srgb, var(--gold) 55%, var(--line)); border-radius: 16px; padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .goal-top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .goal-tag { font-weight: 900; letter-spacing: .08em; font-size: 12px; color: var(--flame); text-transform: uppercase; }
+  .goal-num { margin-left: auto; font-weight: 900; font-size: 20px; }
+  .goal-num .cur { color: var(--gold); }
+  .goal-num .yuan { font-size: 14px; }
+  .thermo { margin-top: 11px; height: 24px; background: var(--paper-2); border: 1.5px solid var(--line); border-radius: 30px; position: relative; overflow: hidden; }
+  .thermo-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--gold-bright)); border-radius: 30px; transition: width .7s cubic-bezier(.2,.7,.2,1); }
+  .thermo-bike { position: absolute; top: 50%; transform: translate(-50%,-50%); font-size: 20px; transition: left .7s cubic-bezier(.2,.7,.2,1); left: 0; filter: drop-shadow(0 1px 1px rgba(0,0,0,.3)); }
+  .goal-pct { margin-top: 7px; font-size: 12.5px; color: var(--ink-soft); font-weight: 700; }
+  .goal.reached { border-color: var(--good); }
+
+  /* HUD */
+  .hud { background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; padding: 18px 20px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  .hud::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent 0 22px, color-mix(in srgb, var(--olive) 6%, transparent) 22px 24px); pointer-events: none; opacity: .5; }
+  .hud-top { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; position: relative; }
+  .plan-tag { display: inline-flex; align-items: center; gap: 7px; color: var(--flame); font-weight: 800; letter-spacing: .12em; font-size: 11px; text-transform: uppercase; }
+  .plan-tag::before { content: "◆"; font-size: 8px; }
+  h1 { font-size: clamp(21px, 4.6vw, 32px); margin: 4px 0 2px; letter-spacing: -.01em; text-wrap: balance; font-weight: 900; }
+  h1 .flame { color: var(--flame); }
+  .subtitle { color: var(--ink-soft); font-size: 13.5px; max-width: 58ch; }
+  .namebox { display: inline-flex; align-items: baseline; gap: 5px; }
+  .name { font-weight: 900; color: var(--gold); border-bottom: 2px dashed color-mix(in srgb, var(--gold) 50%, transparent); cursor: text; outline: none; padding: 0 2px; }
+  .name:focus { background: color-mix(in srgb, var(--gold) 14%, transparent); }
+  .rankbadge { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 118px; }
+  .rank-emblem { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 50% 35%, var(--olive), var(--olive-deep)); border: 3px solid var(--gold-bright); box-shadow: inset 0 2px 6px rgba(255,255,255,.15), var(--shadow); font-size: 30px; position: relative; }
+  .rank-emblem .lv { position: absolute; bottom: -6px; right: -8px; background: var(--flame); color: #fff; font-weight: 900; font-size: 11px; padding: 2px 7px; border-radius: 20px; border: 2px solid var(--card); }
+  .rank-name { font-weight: 900; font-size: 13px; text-align: center; }
+  .stats { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 16px; position: relative; }
+  .stat { flex: 1; min-width: 110px; background: var(--paper-2); border: 1.5px solid var(--line); border-radius: 11px; padding: 10px 13px; }
+  .stat .big { font-size: 23px; font-weight: 900; letter-spacing: -.02em; }
+  .stat.gold .big { color: var(--gold); }
+  .stat.gold .big .yuan { font-size: 15px; }
+  .stat .cap { color: var(--ink-faint); font-size: 11.5px; font-weight: 700; margin-top: 1px; }
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; position: relative; }
+  .btn { font: inherit; font-weight: 800; font-size: 13px; cursor: pointer; border-radius: 10px; padding: 8px 13px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); transition: transform .08s, background .15s, border-color .15s; }
+  .btn:hover { border-color: var(--flame); }
+  .btn:active { transform: translateY(1px); }
+  .btn.on { background: var(--flame); border-color: var(--flame); color: #fff; }
+  .btn.ghost { color: var(--ink-faint); }
+  .btn:focus-visible, .name:focus-visible { outline: 3px solid color-mix(in srgb, var(--flame) 55%, transparent); outline-offset: 2px; }
+
+  .editpanel { display: none; gap: 12px; flex-wrap: wrap; margin-top: 12px; padding: 13px 14px; background: var(--paper-2); border: 1.5px dashed var(--gold); border-radius: 12px; position: relative; }
+  .editpanel.open { display: flex; }
+  .editpanel label { font-size: 12px; font-weight: 800; color: var(--ink-soft); display: flex; flex-direction: column; gap: 4px; }
+  .editpanel input { width: 92px; font: inherit; font-weight: 900; color: var(--gold); font-size: 15px; background: var(--card); border: 1.5px solid var(--gold); border-radius: 8px; padding: 5px 8px; text-align: right; }
+
+  /* TABS */
+  .tabs { display: flex; gap: 8px; margin: 26px 0 4px; flex-wrap: wrap; }
+  .tab { font: inherit; font-weight: 900; font-size: 15px; cursor: pointer; border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); border-radius: 12px 12px 0 0; padding: 11px 18px; display: flex; align-items: center; gap: 8px; border-bottom: none; position: relative; top: 1px; }
+  .tab .cnt { font-size: 11.5px; font-weight: 800; color: var(--ink-faint); background: var(--paper-2); border-radius: 20px; padding: 1px 8px; }
+  .tab.active { color: var(--ink); border-color: var(--flame); border-bottom: 2px solid var(--card); }
+  .tab.active .bar { position: absolute; left: 0; right: 0; top: -1.5px; height: 3px; background: var(--flame); border-radius: 3px; }
+
+  .plan { background: var(--card); border: 1.5px solid var(--line); border-radius: 0 14px 14px 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .plan-head { display: grid; grid-template-columns: 52px 96px 1fr 88px; gap: 10px; padding: 11px 16px; border-bottom: 1.5px solid var(--line); background: var(--paper-2); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
+  .plan-head .c-done { text-align: center; }
+
+  .day { display: grid; grid-template-columns: 52px 96px 1fr 88px; gap: 10px; padding: 13px 16px; border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); align-items: center; }
+  .day:last-child { border-bottom: none; }
+  .day.done { background: color-mix(in srgb, var(--good) 6%, transparent); }
+  .day-n { font-weight: 900; font-size: 13px; color: var(--ink-soft); }
+  .day-n .d { display: block; font-size: 10px; color: var(--ink-faint); font-weight: 800; letter-spacing: .08em; }
+  .uchip { align-self: start; font-weight: 900; font-size: 12px; padding: 3px 9px; border-radius: 20px; border: 1.5px solid; color: var(--uc); border-color: color-mix(in srgb, var(--uc) 48%, var(--line)); background: color-mix(in srgb, var(--uc) 13%, transparent); white-space: nowrap; text-align: center; }
+  .day-body { min-width: 0; }
+  .day-content { font-size: 14px; font-weight: 600; line-height: 1.4; }
+  .day-actions { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 8px; }
+  .yt { font: inherit; font-weight: 800; font-size: 12px; text-decoration: none; color: var(--flame-deep); border: 1.5px solid color-mix(in srgb, var(--flame) 40%, var(--line)); padding: 5px 10px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; background: color-mix(in srgb, var(--flame) 7%, transparent); transition: background .15s; }
+  .yt:hover { background: color-mix(in srgb, var(--flame) 16%, transparent); }
+  .yt svg { width: 15px; height: 15px; }
+  .quizbtn { font: inherit; font-weight: 800; font-size: 12px; cursor: pointer; border: 1.5px solid var(--olive); background: var(--card); color: var(--olive-deep); padding: 5px 11px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; }
+  .quizbtn.passed { border-color: var(--good); color: var(--good); background: color-mix(in srgb, var(--good) 9%, var(--card)); }
+  .quizbtn.mock { border-color: var(--flame); color: var(--flame-deep); background: color-mix(in srgb, var(--flame) 9%, var(--card)); }
+  .quizbtn:hover { filter: brightness(1.03); }
+  .quizbtn:active { transform: scale(.97); }
+
+  .check { justify-self: center; }
+  .check input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .check label { display: grid; place-items: center; width: 34px; height: 34px; border: 2px solid var(--line); border-radius: 9px; cursor: pointer; background: var(--card); transition: all .15s; font-size: 18px; color: transparent; }
+  .check label:hover { border-color: var(--good); }
+  .check input:checked + label { background: var(--good); border-color: var(--good); color: #fff; }
+  .check input:focus-visible + label { outline: 3px solid color-mix(in srgb, var(--good) 55%, transparent); outline-offset: 2px; }
+  .day-reward { font-size: 10.5px; font-weight: 800; color: var(--gold); text-align: center; margin-top: 3px; }
+
+  .legend { display: flex; gap: 14px 18px; flex-wrap: wrap; padding: 12px 16px; font-size: 12px; color: var(--ink-soft); font-weight: 600; border-top: 1.5px solid var(--line); background: var(--paper-2); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .ladder { margin-top: 30px; background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; padding: 18px 20px; box-shadow: var(--shadow); }
+  .ladder h2 { font-size: 17px; font-weight: 900; margin: 0 0 12px; }
+  .rungs { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 9px; }
+  .rung { border: 1.5px solid var(--line); border-radius: 11px; padding: 11px; text-align: center; background: var(--paper-2); opacity: .5; transition: opacity .2s, border-color .2s; }
+  .rung.reached { opacity: 1; border-color: var(--gold); }
+  .rung.current { opacity: 1; border-color: var(--flame); background: color-mix(in srgb, var(--flame) 10%, var(--card)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--flame) 18%, transparent); }
+  .rung .ico { font-size: 26px; }
+  .rung .rn { font-weight: 900; font-size: 12.5px; margin-top: 2px; }
+  .rung .rq { font-size: 11px; color: var(--ink-faint); font-weight: 700; }
+
+  .note { margin-top: 24px; font-size: 12.5px; color: var(--ink-faint); line-height: 1.7; border-top: 1px dashed var(--line); padding-top: 15px; }
+  .note b { color: var(--ink-soft); }
+
+  #toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--ground); font-weight: 900; font-size: 15px; padding: 12px 22px; border-radius: 30px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 60; display: flex; align-items: center; gap: 8px; max-width: 88vw; }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  #toast .coin { color: var(--gold-bright); }
+
+  /* QUIZ MODAL */
+  .overlay { position: fixed; inset: 0; background: rgba(10,11,7,.6); backdrop-filter: blur(3px); display: none; align-items: flex-start; justify-content: center; z-index: 80; overflow-y: auto; padding: 24px 14px; }
+  .overlay.open { display: flex; }
+  .modal { background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); width: 100%; max-width: 560px; padding: 22px; }
+  .modal-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 4px; }
+  .modal-tag { font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: var(--flame); }
+  .modal h3 { font-size: 18px; font-weight: 900; margin: 2px 0 0; }
+  .modal .rule { font-size: 12.5px; color: var(--ink-soft); font-weight: 700; margin: 6px 0 14px; }
+  .close-x { margin-left: auto; font: inherit; font-size: 20px; line-height: 1; cursor: pointer; background: none; border: none; color: var(--ink-faint); padding: 2px 6px; }
+  .qz { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; background: var(--paper-2); }
+  .qz-q { font-weight: 800; font-size: 14.5px; margin-bottom: 9px; }
+  .qz-q .n { color: var(--flame); }
+  .opt { display: flex; align-items: flex-start; gap: 8px; padding: 7px 9px; border-radius: 8px; cursor: pointer; font-size: 14px; border: 1.5px solid transparent; }
+  .opt:hover { background: color-mix(in srgb, var(--flame) 8%, transparent); }
+  .opt input { margin-top: 3px; accent-color: var(--flame); }
+  .qz.graded .opt.correct { background: color-mix(in srgb, var(--good) 16%, transparent); border-color: var(--good); }
+  .qz.graded .opt.wrong { background: color-mix(in srgb, var(--bad) 14%, transparent); border-color: var(--bad); }
+  .qz.graded .opt { cursor: default; }
+  .qz-ans { display: none; margin-top: 8px; font-size: 12.5px; font-weight: 800; color: var(--good); }
+  .qz.graded .qz-ans { display: block; }
+  .modal-foot { display: flex; align-items: center; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+  .submit { font: inherit; font-weight: 900; font-size: 15px; cursor: pointer; border: none; border-radius: 10px; padding: 11px 22px; background: var(--flame); color: #fff; }
+  .submit:active { transform: scale(.97); }
+  .result { font-weight: 900; font-size: 15px; }
+  .result.pass { color: var(--good); }
+  .result.fail { color: var(--bad); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (max-width: 560px) {
+    .rankbadge { order: -1; }
+    .plan-head { display: none; }
+    .day { grid-template-columns: 44px 1fr 40px; grid-template-areas: "n uc check" "n body check"; row-gap: 4px; }
+    .day-n { grid-area: n; } .uchip { grid-area: uc; justify-self: start; } .day-body { grid-area: body; } .check { grid-area: check; }
+    .day-reward { display: none; }
+  }
+</style>
+<style>
+  html { background: var(--ground); }
+  @supports (padding: max(0px)) {
+    .container { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+    @media (display-mode: standalone) { .container { padding-top: max(22px, env(safe-area-inset-top)); } }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="container">
+
+    <section class="goal" id="goalCard">
+      <div class="goal-top">
+        <span class="goal-tag">🚲 최종 도전 · 자전거 원정대</span>
+        <span class="goal-num"><span class="cur tabnum" id="goalCur">0</span> / <span class="tabnum" id="goalTot">3000</span><span class="yuan">元</span></span>
+      </div>
+      <div class="thermo"><div class="thermo-fill" id="thermoFill"></div><span class="thermo-bike" id="thermoBike">🚲</span></div>
+      <div class="goal-pct" id="goalPct"></div>
+    </section>
+
+    <section class="hud">
+      <div class="hud-top">
+        <div>
+          <span class="plan-tag">중1 1학기 · 14일 완성 작전</span>
+          <h1>취사병 <span class="flame">전설</span>이 되다</h1>
+          <p class="subtitle">
+            <span class="namebox"><span class="name" id="playerName" contenteditable="true" spellcheck="false">우리 아들</span> 취사병</span>의 국어·과학·사회 1학기 완성표 —
+            매일 영상 보고 <b style="color:var(--good)">완료 체크</b>, 단원 끝엔 <b style="color:var(--flame)">확인문제</b>로 복습! 용돈 모아 자전거 사기 🚲
+          </p>
+        </div>
+        <div class="rankbadge">
+          <div class="rank-emblem"><span id="rankIco">🥄</span><span class="lv" id="rankLv">Lv.1</span></div>
+          <div class="rank-name" id="rankName">이등병 취사병</div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat gold"><div class="big"><span class="tabnum" id="totalYuan">0</span> <span class="yuan">元</span></div><div class="cap">누적 획득 용돈</div></div>
+        <div class="stat"><div class="big"><span class="tabnum" id="doneCount">0</span> <span style="font-size:15px;color:var(--ink-faint)">/ 42일</span></div><div class="cap">완료한 학습일</div></div>
+        <div class="stat"><div class="big"><span class="tabnum" id="quizCount">0</span> <span style="font-size:15px;color:var(--ink-faint)">/ 19</span></div><div class="cap">통과한 확인문제</div></div>
+      </div>
+      <div class="toolbar">
+        <button class="btn" id="editBtn">✏️ 금액·목표 수정</button>
+        <button class="btn ghost" id="resetBtn">↺ 처음부터</button>
+      </div>
+      <div class="editpanel" id="editPanel">
+        <label>하루 완료<input type="number" min="0" step="5" id="edDay"></label>
+        <label>확인문제 통과<input type="number" min="0" step="5" id="edQuiz"></label>
+        <label>모의테스트<input type="number" min="0" step="10" id="edMock"></label>
+        <label>자전거 목표(元)<input type="number" min="0" step="100" id="edGoal"></label>
+      </div>
+    </section>
+
+    <div class="tabs" id="tabs"></div>
+    <div id="planHost"></div>
+
+    <section class="ladder">
+      <h2>🎖 계급표 — 학습일을 채울수록 진급!</h2>
+      <div class="rungs" id="rungs"></div>
+    </section>
+
+    <p class="note">
+      <b>📝 확인문제(QUIZ):</b> 단원이 끝나는 날 <b>확인문제</b> 버튼이 있어요. 간단한 객관식이고 <b>채점하면 정답이 초록으로 표시</b>돼 바로 복습됩니다. <b>80점(5문제 중 4개) 이상</b>이면 통과·용돈 지급, 미달이면 영상 다시 보고 재도전!<br>
+      <b>📺 영상:</b> 각 날짜의 <b>유튜브</b> 버튼을 누르면 그 내용 검색 결과가 열려요. 추천 채널: EBS 중학, 수박씨닷컴 등.<br>
+      <b>📚 단원 안내:</b> 과학은 2015 개정 <b>중1 1학기</b>(지권·힘·생물·기체·상태 변화) 기준입니다. 국어·사회는 출판사·학교마다 순서가 조금 달라요 — 교과서 목차와 맞춰 참고하세요.<br>
+      <b>💾 자동 저장 · 조절:</b> 진행상황은 이 브라우저에 저장돼요. <b>금액·목표 수정</b>으로 용돈 단가·자전거 목표를, 이름은 위에서 바로 바꿀 수 있어요. (기본값: 하루 40 + 확인문제 60 + 모의 120 = 전부 완료 시 정확히 3000元)
+    </p>
+  </div>
+</div>
+
+<div id="toast"><span class="coin">🪙</span><span id="toastText"></span></div>
+<div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var RANKS = [
+    { min:0,  ico:"🥄", name:"이등병 취사병" },
+    { min:8,  ico:"🍳", name:"일병 취사병" },
+    { min:16, ico:"🔪", name:"상병 취사병" },
+    { min:24, ico:"🍲", name:"병장 취사병" },
+    { min:33, ico:"👨‍🍳", name:"취사반장" },
+    { min:42, ico:"🏆", name:"전설의 취사병" }
+  ];
+
+  // color palette for unit chips
+  var C = { earth:"#B5842F", force:"#3B82C4", bio:"#4E8A3E", gas:"#7C6BD4", state:"#1FA3A3",
+            poem:"#C4557A", novel:"#E0662B", gram:"#7C6BD4", read:"#6E8B45", talk:"#1FA3A3",
+            world:"#3B82C4", climate:"#1FA3A3", land:"#B5842F", culture:"#C4557A", disaster:"#D4A017", resource:"#6E8B45",
+            review:"#8A8A7A", final:"#4E8A3E" };
+
+  // SUBJECTS. day: {n, unit, uc, content, ytq, quiz?}
+  // quiz: {kind:'unit'|'mock', z:[[question,[opts],ansIndex], ...]}
+  var SUBJECTS = [
+    { key:"kor", name:"국어", days:[
+      { n:1, unit:"시", uc:C.poem, content:"비유하는 표현(직유·은유)과 상징 이해하기", ytq:"시 비유 직유 은유 상징" },
+      { n:2, unit:"시", uc:C.poem, content:"운율과 심상, 시적 화자의 정서 파악", ytq:"시 운율 심상 시적 화자 정서", quiz:{kind:"unit", z:[
+        ["'~같이 / ~처럼'을 써서 직접 빗대는 표현법은?",["은유법","직유법","의인법","반복법"],1],
+        ["'내 마음은 호수요'처럼 'A는 B다' 형식으로 빗대는 표현법은?",["직유법","은유법","과장법","대구법"],1],
+        ["사람이 아닌 대상을 사람처럼 표현하는 방법은?",["의인법","직유법","설의법","도치법"],0],
+        ["시를 읽을 때 머릿속에 떠오르는 감각적 이미지는?",["운율","심상","주제","행"],1],
+        ["시에서 말하는 이를 뜻하는 말은?",["시적 화자","작가","독자","청자"],0]]}},
+      { n:3, unit:"소설", uc:C.novel, content:"소설의 3요소(인물·사건·배경)와 서술자", ytq:"소설 인물 사건 배경 서술자" },
+      { n:4, unit:"소설", uc:C.novel, content:"갈등의 종류와 구성 단계(발단-전개-위기-절정-결말)", ytq:"소설 갈등 구성 단계 발단 전개 위기 절정 결말", quiz:{kind:"unit", z:[
+        ["소설의 3요소가 아닌 것은?",["인물","사건","배경","가격"],3],
+        ["소설에서 이야기를 들려주는 사람은?",["작가","서술자","독자","주인공"],1],
+        ["인물의 마음속에서 일어나는 갈등을 무엇이라 하나요?",["내적 갈등","외적 갈등","사회적 갈등","자연과의 갈등"],0],
+        ["소설 구성 단계의 순서로 옳은 것은?",["발단-전개-위기-절정-결말","전개-발단-결말-위기","절정-발단-전개-결말","결말-절정-위기-전개"],0],
+        ["사건이 일어나는 시간과 장소를 뜻하는 것은?",["배경","인물","절정","문체"],0]]}},
+      { n:5, unit:"문법", uc:C.gram, content:"언어의 본질(자의성·사회성·역사성·창조성)", ytq:"언어의 본질 자의성 사회성 역사성 창조성" },
+      { n:6, unit:"문법", uc:C.gram, content:"음운의 체계 — 자음과 모음, 음운의 특성", ytq:"음운 자음 모음 체계", quiz:{kind:"unit", z:[
+        ["말의 뜻을 구별해 주는 가장 작은 소리의 단위는?",["음운","단어","문장","문단"],0],
+        ["우리말 단모음은 모두 몇 개인가요?",["7개","9개","10개","14개"],2],
+        ["소리 낼 때 공기 흐름이 막히거나 좁아지며 나는 소리는?",["모음","자음","받침","음절"],1],
+        ["말소리와 의미 사이에 필연적 관계가 없다는 언어의 특성은?",["자의성","사회성","역사성","규칙성"],0],
+        ["다음 중 자음이 아닌 것은?",["ㄱ","ㅅ","ㅏ","ㅁ"],2]]}},
+      { n:7, unit:"읽기", uc:C.read, content:"예측하며 읽기, 읽기의 과정과 방법", ytq:"예측하며 읽기 읽기 과정 방법" },
+      { n:8, unit:"읽기", uc:C.read, content:"설명하는 글과 설명 방법(정의·예시·비교·분류)", ytq:"설명하는 글 설명 방법 정의 예시 비교 분류", quiz:{kind:"unit", z:[
+        ["어떤 말의 뜻을 밝혀 설명하는 방법은?",["정의","예시","비교","분류"],0],
+        ["구체적인 예를 들어 설명하는 방법은?",["대조","예시","정의","분석"],1],
+        ["여러 대상을 일정한 기준으로 나누어 설명하는 방법은?",["분류","인과","비교","정의"],0],
+        ["설명하는 글의 목적으로 알맞은 것은?",["정보 전달","설득","감정 표현","명령"],0],
+        ["글을 읽기 전 제목·그림으로 내용을 미리 짐작하는 것은?",["예측하며 읽기","훑어만 보기","베껴 쓰기","무조건 외우기"],0]]}},
+      { n:9, unit:"쓰기", uc:C.read, content:"경험을 담은 글(자기 성찰), 통일성 있는 글쓰기", ytq:"경험을 담은 글 자기 성찰 통일성 글쓰기" },
+      { n:10, unit:"화법", uc:C.talk, content:"공감하며 대화하기, 듣기의 바른 태도", ytq:"공감하며 대화하기 경청 듣기 태도", quiz:{kind:"unit", z:[
+        ["상대의 처지와 마음에 공감하며 나누는 대화는?",["공감적 대화","토론","발표","연설"],0],
+        ["상대의 말을 잘 듣는 바람직한 태도는?",["공감하며 경청하기","딴짓하기","중간에 끊기","비웃기"],0],
+        ["대화에서 상대를 배려하는 말하기로 알맞은 것은?",["상대 입장을 이해하며 말하기","무시하기","명령하기","비난하기"],0],
+        ["글의 모든 문장이 하나의 주제로 모이는 성질은?",["통일성","창의성","다양성","속도"],0],
+        ["자신의 경험·생각을 돌아보며 쓰는 글은?",["자기 성찰 글(수필)","설명문","광고","안내문"],0]]}},
+      { n:11, unit:"어휘·문법", uc:C.gram, content:"단어의 짜임과 어휘 확장 (심화·보충)", ytq:"단어의 짜임 어근 접사 어휘 확장" },
+      { n:12, unit:"종합", uc:C.final, content:"시·소설·문법·읽기·화법 핵심 개념 한 번에 정리", ytq:"중1 국어 1학기 핵심 정리" },
+      { n:13, unit:"복습", uc:C.review, content:"취약 영역 다시 보기 + 오답노트 정리", ytq:"중1 국어 1학기 총정리 오답" },
+      { n:14, unit:"총정리", uc:C.final, content:"전체 복습 + 모의 확인테스트", ytq:"중1 국어 1학기 총정리 문제", quiz:{kind:"mock", z:[
+        ["'~처럼'을 써서 직접 빗대는 표현법은?",["은유법","직유법","의인법","반복법"],1],
+        ["소설에서 이야기를 들려주는 사람은?",["작가","서술자","독자","주인공"],1],
+        ["뜻을 구별해 주는 가장 작은 소리의 단위는?",["음운","단어","문장","음절"],0],
+        ["어떤 말의 뜻을 밝혀 설명하는 방법은?",["정의","예시","비교","분류"],0],
+        ["글의 모든 문장이 하나의 주제로 모이는 성질은?",["통일성","창의성","다양성","속도"],0],
+        ["상대의 마음에 공감하며 나누는 대화는?",["공감적 대화","토론","발표","명령"],0],
+        ["소설의 3요소가 아닌 것은?",["인물","사건","배경","가격"],3],
+        ["우리말 단모음은 모두 몇 개인가요?",["7개","9개","10개","14개"],2]]}}
+    ]},
+
+    { key:"sci", name:"과학", days:[
+      { n:1, unit:"지권의 변화", uc:C.earth, content:"지구계와 지권의 층상 구조(지각·맨틀·외핵·내핵)", ytq:"지권의 변화 지구 내부 구조 지각 맨틀 핵" },
+      { n:2, unit:"지권의 변화", uc:C.earth, content:"암석의 종류(화성암·퇴적암·변성암)와 암석의 순환", ytq:"암석 화성암 퇴적암 변성암 암석 순환" },
+      { n:3, unit:"지권의 변화", uc:C.earth, content:"광물과 토양, 풍화 작용", ytq:"광물 토양 풍화 작용", quiz:{kind:"unit", z:[
+        ["지구 내부를 바깥에서 안쪽 순서로 옳게 나열한 것은?",["지각-맨틀-외핵-내핵","맨틀-지각-핵","핵-맨틀-지각","지각-핵-맨틀"],0],
+        ["마그마가 식어 굳어 만들어진 암석은?",["퇴적암","화성암","변성암","광물"],1],
+        ["자갈·모래·진흙이 쌓여 굳어진 암석은?",["화성암","변성암","퇴적암","현무암"],2],
+        ["암석이 잘게 부서지고 성분이 변하는 작용은?",["풍화","융기","분출","퇴적"],0],
+        ["암석을 이루는 알갱이로, 일정한 성분을 가진 것은?",["토양","광물","화석","지층"],1]]}},
+      { n:4, unit:"여러 가지 힘", uc:C.force, content:"중력과 탄성력", ytq:"여러 가지 힘 중력 탄성력" },
+      { n:5, unit:"여러 가지 힘", uc:C.force, content:"마찰력과 부력, 힘의 단위", ytq:"마찰력 부력 힘의 단위 뉴턴", quiz:{kind:"unit", z:[
+        ["지구가 물체를 지구 중심으로 끌어당기는 힘은?",["마찰력","중력","탄성력","부력"],1],
+        ["변형된 물체가 원래대로 돌아가려는 힘은?",["탄성력","중력","마찰력","전기력"],0],
+        ["두 물체가 닿아 움직임을 방해하는 힘은?",["중력","부력","마찰력","자기력"],2],
+        ["물이나 공기가 물체를 위로 밀어 올리는 힘은?",["중력","부력","마찰력","탄성력"],1],
+        ["힘의 크기를 나타내는 단위는?",["N(뉴턴)","kg","m","℃"],0]]}},
+      { n:6, unit:"생물의 다양성", uc:C.bio, content:"생물다양성의 의미와 생물의 분류", ytq:"생물의 다양성 생물다양성 분류" },
+      { n:7, unit:"생물의 다양성", uc:C.bio, content:"생물다양성 보전과 생물 자원의 이용", ytq:"생물다양성 보전 생물 자원 이용", quiz:{kind:"unit", z:[
+        ["생물다양성이 가장 높은 지역은?",["사막","극지방","열대우림","빙하"],2],
+        ["생물을 비슷한 특징끼리 무리 짓는 것을 무엇이라 하나요?",["분류","진화","적응","번식"],0],
+        ["환경에 알맞게 몸의 특징이 변해 살아가는 것은?",["적응","멸종","분류","변성"],0],
+        ["생물다양성이 줄어드는 원인이 아닌 것은?",["서식지 파괴","환경 오염","남획","자연 보호"],3],
+        ["생물 분류 단계 중 가장 큰(넓은) 무리는?",["종","속","계","과"],2]]}},
+      { n:8, unit:"기체의 성질", uc:C.gas, content:"입자의 운동과 확산·증발", ytq:"기체의 성질 입자 운동 확산 증발" },
+      { n:9, unit:"기체의 성질", uc:C.gas, content:"압력과 부피(보일 법칙), 온도와 부피(샤를 법칙)", ytq:"보일 법칙 샤를 법칙 압력 부피 온도", quiz:{kind:"unit", z:[
+        ["기체 입자의 운동에 대한 옳은 설명은?",["끊임없이 스스로 움직인다","정지해 있다","서로 붙어 있다","모양이 고정되어 있다"],0],
+        ["온도가 일정할 때 압력이 커지면 기체의 부피는?",["커진다","작아진다","변화 없다","사라진다"],1],
+        ["압력이 일정할 때 온도가 높아지면 기체의 부피는?",["작아진다","커진다","없어진다","일정하다"],1],
+        ["압력과 부피의 관계를 나타낸 법칙은?",["보일 법칙","샤를 법칙","옴 법칙","뉴턴 법칙"],0],
+        ["향수 냄새가 방 안에 퍼지는 것처럼 입자가 스스로 퍼지는 현상은?",["확산","응고","융해","부력"],0]]}},
+      { n:10, unit:"상태 변화", uc:C.state, content:"물질의 세 가지 상태와 상태 변화", ytq:"물질의 상태 고체 액체 기체 상태 변화" },
+      { n:11, unit:"상태 변화", uc:C.state, content:"상태 변화와 열에너지(흡수·방출)", ytq:"상태 변화 열에너지 흡수 방출", quiz:{kind:"unit", z:[
+        ["고체가 액체로 변하는 현상은?",["융해","응고","기화","승화"],0],
+        ["액체가 기체로 변하는 현상은?",["액화","기화","승화","융해"],1],
+        ["기체가 액체로 변하는 현상은?",["기화","액화","응고","융해"],1],
+        ["드라이아이스처럼 고체가 바로 기체로 변하는 현상은?",["융해","승화","응고","액화"],1],
+        ["상태 변화가 일어날 때 함께 나타나는 것은?",["열에너지의 흡수 또는 방출","질량의 증가","원자의 생성","색의 변화"],0]]}},
+      { n:12, unit:"종합", uc:C.final, content:"5개 단원 핵심 개념 한 번에 정리", ytq:"중1 과학 1학기 핵심 정리" },
+      { n:13, unit:"복습", uc:C.review, content:"취약 단원 다시 보기 + 오답노트 정리", ytq:"중1 과학 1학기 총정리 오답" },
+      { n:14, unit:"총정리", uc:C.final, content:"전체 복습 + 모의 확인테스트", ytq:"중1 과학 1학기 총정리 문제", quiz:{kind:"mock", z:[
+        ["지구 내부에서 가장 바깥층은?",["지각","맨틀","외핵","내핵"],0],
+        ["물체를 지구 중심으로 끌어당기는 힘은?",["부력","중력","탄성력","마찰력"],1],
+        ["생물 분류에서 가장 큰 단위는?",["종","계","과","속"],1],
+        ["온도가 일정할 때 압력이 커지면 기체 부피는?",["커진다","작아진다","변화 없다","사라진다"],1],
+        ["고체가 액체로 변하는 현상은?",["융해","응고","기화","승화"],0],
+        ["기체가 액체로 변하는 현상은?",["기화","액화","응고","융해"],1],
+        ["마그마가 식어 굳어 만들어진 암석은?",["퇴적암","화성암","변성암","광물"],1],
+        ["힘의 크기를 나타내는 단위는?",["N(뉴턴)","kg","L","℃"],0]]}}
+    ]},
+
+    { key:"soc", name:"사회", days:[
+      { n:1, unit:"내가 사는 세계", uc:C.world, content:"위치 표현(위도·경도)과 지도 읽기", ytq:"내가 사는 세계 위도 경도 지도" },
+      { n:2, unit:"내가 사는 세계", uc:C.world, content:"지리 정보와 위치에 따른 생활 모습", ytq:"지리 정보 위치 시간대 생활", quiz:{kind:"unit", z:[
+        ["적도를 기준으로 남북의 위치를 나타내는 좌표는?",["경도","위도","해발","방위"],1],
+        ["본초 자오선을 기준으로 동서 위치를 나타내는 좌표는?",["위도","경도","등고선","축척"],1],
+        ["위도 0°에 해당하는 선은?",["적도","본초 자오선","날짜 변경선","회귀선"],0],
+        ["지도에서 실제 거리를 줄인 정도를 나타내는 것은?",["축척","방위","기호","등고선"],0],
+        ["경도 15°마다 나는 시간 차이는?",["1시간","2시간","30분","3시간"],0]]}},
+      { n:3, unit:"세계의 기후", uc:C.climate, content:"세계의 다양한 기후(열대·건조·온대·냉대·한대)", ytq:"세계의 기후 열대 건조 온대 냉대 한대" },
+      { n:4, unit:"세계의 기후", uc:C.climate, content:"기후에 따른 사람들의 생활 모습", ytq:"기후에 따른 생활 모습 의식주", quiz:{kind:"unit", z:[
+        ["일 년 내내 덥고 비가 많이 내리는 기후는?",["한대","열대","건조","냉대"],1],
+        ["비가 매우 적어 사막이 나타나는 기후는?",["온대","열대","건조","한대"],2],
+        ["사계절이 비교적 뚜렷하고 사람이 많이 사는 기후는?",["온대","한대","건조","열대우림"],0],
+        ["극지방처럼 몹시 추운 기후는?",["열대","건조","온대","한대"],3],
+        ["기후에 영향을 주는 요소가 아닌 것은?",["위도","해발 고도","바다와의 거리","사람의 이름"],3]]}},
+      { n:5, unit:"지형", uc:C.land, content:"자연으로 떠나는 여행 — 산지·해안 지형", ytq:"산지 해안 지형 침식 퇴적" },
+      { n:6, unit:"지형", uc:C.land, content:"화산·카르스트 등 특수 지형과 관광", ytq:"화산 지형 카르스트 지형 관광", quiz:{kind:"unit", z:[
+        ["석회암이 빗물에 녹아 만들어진 지형은?",["화산 지형","카르스트 지형","빙하 지형","해안 지형"],1],
+        ["파도의 침식으로 해안에 만들어지는 절벽은?",["삼각주","해식 절벽","사구","범람원"],1],
+        ["강물이 운반한 흙이 하구에 쌓여 만들어진 평평한 지형은?",["삼각주","고원","단층","빙하"],0],
+        ["마그마가 분출하여 만들어진 지형은?",["화산 지형","평야","분지","해안"],0],
+        ["지형을 '깎아 내는' 작용은?",["퇴적","침식","융기","분출"],1]]}},
+      { n:7, unit:"문화", uc:C.culture, content:"세계의 문화 지역과 문화의 다양성", ytq:"세계의 문화 지역 문화 다양성" },
+      { n:8, unit:"문화", uc:C.culture, content:"문화 변동과 문화 접촉, 문화 이해 태도", ytq:"문화 변동 문화 접촉 문화 상대주의", quiz:{kind:"unit", z:[
+        ["한 사회의 구성원이 공유하는 생활 양식은?",["문화","법","정치","경제"],0],
+        ["자연환경이 비슷해 생활 모습이 유사하게 나타나는 지역은?",["문화 지역","행정 구역","기후대","시간대"],0],
+        ["서로 다른 문화가 만나 새로운 문화가 나타나는 현상은?",["문화 변동","문화 획일화","문화 소멸","편견"],0],
+        ["각 문화를 그 사회의 입장에서 이해하려는 태도는?",["문화 상대주의","자문화 중심주의","문화 사대주의","편견"],0],
+        ["문화의 특징으로 알맞은 것은?",["후천적으로 학습된다","타고난다","전혀 변하지 않는다","개인만의 것이다"],0]]}},
+      { n:9, unit:"자연재해", uc:C.disaster, content:"자연재해의 종류(지진·화산·홍수·가뭄·폭설)", ytq:"자연재해 지진 화산 홍수 가뭄 폭설" },
+      { n:10, unit:"자연재해", uc:C.disaster, content:"자연재해 대비와 대응 방법", ytq:"자연재해 대비 대응 예보 대피", quiz:{kind:"unit", z:[
+        ["땅속 에너지가 방출되어 땅이 흔들리는 자연재해는?",["지진","화재","감염병","정전"],0],
+        ["마그마가 지표로 분출하는 자연재해는?",["화산 활동","지진","홍수","폭설"],0],
+        ["비가 오랫동안 오지 않아 물이 부족한 재해는?",["홍수","가뭄","지진","화산"],1],
+        ["지진 발생 시 실내에서 올바른 행동은?",["튼튼한 책상 아래로 몸을 보호한다","엘리베이터를 이용한다","창가로 이동한다","뛰어다닌다"],0],
+        ["자연재해 피해를 줄이기 위한 노력으로 알맞은 것은?",["예보와 대피 훈련","무시하기","건물 부실 시공","경보 끄기"],0]]}},
+      { n:11, unit:"자원과 갈등", uc:C.resource, content:"자원의 의미와 특성, 자원의 분포", ytq:"자원 특성 편재성 분포 지하자원" },
+      { n:12, unit:"자원과 갈등", uc:C.resource, content:"자원을 둘러싼 경쟁과 갈등, 지속가능한 이용", ytq:"자원을 둘러싼 경쟁과 갈등 지속가능", quiz:{kind:"unit", z:[
+        ["땅속에서 얻으며 양이 한정된 자원은?",["재생 자원","지하자원","인적 자원","무한 자원"],1],
+        ["자원이 특정 지역에 치우쳐 분포하는 특성은?",["편재성","무한성","균등성","재생성"],0],
+        ["전기·연료로 쓰이며 갈등이 잦은 에너지 자원은?",["석유","모래","공기","흙"],0],
+        ["다음 중 재생 가능 에너지는?",["석탄","석유","태양광","천연가스"],2],
+        ["자원을 지속가능하게 이용하는 방법은?",["절약과 재생에너지 개발","무조건 많이 사용","독점","낭비"],0]]}},
+      { n:13, unit:"복습", uc:C.review, content:"취약 단원 다시 보기 + 오답노트 정리", ytq:"중1 사회 1학기 총정리 오답" },
+      { n:14, unit:"총정리", uc:C.final, content:"전체 복습 + 모의 확인테스트", ytq:"중1 사회 1학기 총정리 문제", quiz:{kind:"mock", z:[
+        ["적도를 기준으로 남북의 위치를 나타내는 좌표는?",["경도","위도","해발","방위"],1],
+        ["사계절이 비교적 뚜렷한 기후는?",["열대","온대","한대","건조"],1],
+        ["석회암이 녹아 만들어진 지형은?",["삼각주","카르스트","화산","사구"],1],
+        ["각 문화를 그 사회의 입장에서 이해하는 태도는?",["문화 상대주의","자문화 중심주의","문화 사대주의","편견"],0],
+        ["마그마가 지표로 분출하는 재해는?",["지진","홍수","화산 활동","가뭄"],2],
+        ["자원이 한곳에 치우쳐 분포하는 특성은?",["편재성","무한성","균등성","재생성"],0],
+        ["위도 0°에 해당하는 선은?",["적도","본초 자오선","회귀선","날짜 변경선"],0],
+        ["다음 중 재생 가능 에너지는?",["석탄","석유","태양광","천연가스"],2]]}}
+    ]}
+  ];
+
+  var YT = "https://www.youtube.com/results?search_query=";
+  var KEY = "chwisabyeong_plan_v4";
+
+  var DEF = { rDay:40, rQuiz:60, rMock:120, goal:3000 };
+  var state = load();
+  function load() {
+    try { var raw = localStorage.getItem(KEY); if (raw) { var s = JSON.parse(raw); return normalize(s); } } catch (e) {}
+    return { name:"우리 아들", days:{}, quiz:{}, score:{}, perfect:{}, rDay:DEF.rDay, rQuiz:DEF.rQuiz, rMock:DEF.rMock, goal:DEF.goal };
+  }
+  function normalize(s) {
+    s.days = s.days||{}; s.quiz = s.quiz||{}; s.score = s.score||{}; s.perfect = s.perfect||{};
+    if (s.rDay==null) s.rDay=DEF.rDay; if (s.rQuiz==null) s.rQuiz=DEF.rQuiz;
+    if (s.rMock==null) s.rMock=DEF.rMock; if (s.goal==null) s.goal=DEF.goal;
+    if (!s.name) s.name="우리 아들"; return s;
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  // build quiz lookup + counts
+  var QUIZ = {}, unitQuizIds = [], mockQuizIds = [], TOTAL_DAYS = 0;
+  SUBJECTS.forEach(function (sub) {
+    sub.days.forEach(function (d) {
+      TOTAL_DAYS++;
+      d.dayId = sub.key + "-d" + d.n;
+      if (d.quiz) {
+        var qid = sub.key + "-q" + d.n;
+        d.quizId = qid;
+        QUIZ[qid] = { title: sub.name + " · " + d.unit + (d.quiz.kind==="mock"?" 모의테스트":" 확인문제"), kind: d.quiz.kind, z: d.quiz.z };
+        if (d.quiz.kind==="mock") mockQuizIds.push(qid); else unitQuizIds.push(qid);
+      }
+    });
+  });
+  var TOTAL_QUIZ = unitQuizIds.length + mockQuizIds.length;
+
+  function quizReward(kind) { return kind==="mock" ? state.rMock : state.rQuiz; }
+  function passMark(z) { return Math.ceil(z.length * 0.8); }
+
+  var activeTab = "kor";
+  var editMode = false;
+  var lastRank = -1, lastGoalReached = false;
+
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function ytHref(sub, d){ return YT + encodeURIComponent("중1 1학기 " + sub.name + " " + d.ytq); }
+
+  function renderTabs() {
+    var el = document.getElementById("tabs"); el.innerHTML = "";
+    SUBJECTS.forEach(function (sub) {
+      var done = sub.days.filter(function (d){ return state.days[d.dayId]; }).length;
+      var b = document.createElement("button");
+      b.className = "tab" + (sub.key===activeTab ? " active" : "");
+      b.innerHTML = (sub.key===activeTab?'<span class="bar"></span>':'') + sub.name + '<span class="cnt">' + done + '/14</span>';
+      b.addEventListener("click", function(){ activeTab = sub.key; renderTabs(); renderPlan(); });
+      el.appendChild(b);
+    });
+  }
+
+  var YTSVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 4.9 12 4.9 12 4.9s-7 0-8.9.5A3 3 0 0 0 1 7.5 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5A3 3 0 0 0 23 16.5 31 31 0 0 0 23.5 12 31 31 0 0 0 23 7.5zM9.8 15.3V8.7l5.7 3.3z"/></svg>';
+
+  function renderPlan() {
+    var sub = SUBJECTS.filter(function (s){ return s.key===activeTab; })[0];
+    var host = document.getElementById("planHost");
+    var html = '<div class="plan"><div class="plan-head"><span>일자</span><span>단원</span><span>학습 내용</span><span class="c-done">완료</span></div>';
+    sub.days.forEach(function (d) {
+      var done = !!state.days[d.dayId];
+      var acts = '<a class="yt" target="_blank" rel="noopener" href="' + ytHref(sub,d) + '">' + YTSVG + '유튜브</a>';
+      if (d.quizId) {
+        var passed = !!state.quiz[d.quizId], mock = d.quiz.kind==="mock";
+        var star = state.perfect[d.quizId] ? " ⭐" : "";
+        var lbl = mock ? "모의 확인테스트" : "확인문제";
+        var sc = passed ? " · " + (state.score[d.quizId]||0) + "점" : "";
+        acts += '<button class="quizbtn' + (mock?' mock':'') + (passed?' passed':'') + '" data-quiz="' + d.quizId + '">' +
+          (passed?'✓ ':'📝 ') + lbl + sc + star + '</button>';
+      }
+      html += '<div class="day' + (done?' done':'') + '">' +
+        '<div class="day-n"><span class="d">DAY</span>' + d.n + '</div>' +
+        '<span class="uchip" style="--uc:' + d.uc + '">' + esc(d.unit) + '</span>' +
+        '<div class="day-body"><div class="day-content">' + esc(d.content) + '</div>' +
+          '<div class="day-actions">' + acts + '</div></div>' +
+        '<div class="check"><input type="checkbox" id="' + d.dayId + '"' + (done?' checked':'') + '>' +
+          '<label for="' + d.dayId + '" aria-label="완료 체크">✓</label>' +
+          '<div class="day-reward">+' + state.rDay + '元</div></div>' +
+        '</div>';
+    });
+    html += '<div class="legend">';
+    var seen = {};
+    sub.days.forEach(function (d){ if (!seen[d.unit]) { seen[d.unit]=1; html += '<span><span class="dot" style="background:' + d.uc + '"></span>' + esc(d.unit) + '</span>'; } });
+    html += '</div></div>';
+    host.innerHTML = html;
+
+    host.querySelectorAll('input[type=checkbox]').forEach(function (cb) {
+      cb.addEventListener("change", function () { toggleDay(cb.id, cb.checked); });
+    });
+    host.querySelectorAll('[data-quiz]').forEach(function (b) {
+      b.addEventListener("click", function () { openQuiz(b.getAttribute("data-quiz")); });
+    });
+    updateHUD();
+  }
+
+  function toggleDay(id, on) {
+    if (on) { state.days[id] = true; } else { delete state.days[id]; }
+    save();
+    if (on) { showToast("학습 완료!  +" + state.rDay + "元"); }
+    renderTabs(); updateHUD();
+    var row = document.getElementById(id); if (row) row.closest(".day").classList.toggle("done", on);
+  }
+
+  function openQuiz(qid) {
+    var Q = QUIZ[qid]; if (!Q) return;
+    var modal = document.getElementById("modal");
+    var need = passMark(Q.z), rew = quizReward(Q.kind);
+    var wrap = document.createElement("div");
+
+    var head = document.createElement("div"); head.className = "modal-head";
+    head.innerHTML = '<div><div class="modal-tag">' + (Q.kind==="mock"?"모의 확인테스트":"확인문제") + '</div><h3>' + esc(Q.title) + '</h3></div>';
+    var x = document.createElement("button"); x.className="close-x"; x.setAttribute("aria-label","닫기"); x.textContent="✕";
+    x.addEventListener("click", closeQuiz); head.appendChild(x); wrap.appendChild(head);
+
+    var rule = document.createElement("div"); rule.className="rule";
+    rule.textContent = "합격선 80점 — 총 " + Q.z.length + "문제 중 " + need + "개 이상 맞히면 통과! (" + rew + "元) · 채점하면 정답이 표시돼요.";
+    wrap.appendChild(rule);
+
+    Q.z.forEach(function (row, qi) {
+      var box = document.createElement("div"); box.className="qz"; box.dataset.ans=row[2];
+      var qh = document.createElement("div"); qh.className="qz-q";
+      qh.innerHTML = '<span class="n">Q' + (qi+1) + '.</span> ' + esc(row[0]);
+      box.appendChild(qh);
+      row[1].forEach(function (opt, oi) {
+        var lab = document.createElement("label"); lab.className="opt"; lab.dataset.oi=oi;
+        var inp = document.createElement("input"); inp.type="radio"; inp.name="q"+qi; inp.value=oi;
+        var sp = document.createElement("span"); sp.textContent = opt;
+        lab.appendChild(inp); lab.appendChild(sp); box.appendChild(lab);
+      });
+      var ansline = document.createElement("div"); ansline.className="qz-ans";
+      ansline.textContent = "정답: " + row[1][row[2]];
+      box.appendChild(ansline);
+      wrap.appendChild(box);
+    });
+
+    var foot = document.createElement("div"); foot.className="modal-foot";
+    var sub = document.createElement("button"); sub.className="submit"; sub.textContent="채점하기";
+    var res = document.createElement("div"); res.className="result";
+    foot.appendChild(sub); foot.appendChild(res); wrap.appendChild(foot);
+
+    sub.addEventListener("click", function () {
+      var boxes = wrap.querySelectorAll(".qz"), answered=0, correct=0;
+      boxes.forEach(function (box){ if (box.querySelector('input:checked')) answered++; });
+      if (answered < boxes.length) { res.className="result fail"; res.textContent="모든 문제에 답해 주세요!"; return; }
+      boxes.forEach(function (box) {
+        var ans = parseInt(box.dataset.ans,10);
+        var sel = box.querySelector('input:checked'), chosen = parseInt(sel.value,10);
+        if (chosen === ans) correct++;
+        box.classList.add("graded");
+        box.querySelectorAll(".opt").forEach(function (op) {
+          var oi = parseInt(op.dataset.oi,10);
+          if (oi === ans) op.classList.add("correct"); else if (oi === chosen) op.classList.add("wrong");
+          op.querySelector("input").disabled = true;
+        });
+      });
+      var score = Math.round(correct / boxes.length * 100), passed = correct >= need;
+      sub.style.display = "none";
+      if (passed) {
+        var first = !state.quiz[qid];
+        state.quiz[qid] = true;
+        state.score[qid] = Math.max(state.score[qid]||0, score);
+        if (score === 100) state.perfect[qid] = true;
+        save();
+        res.className="result pass";
+        res.textContent = (score===100?"⭐ 만점! ":"🎉 ") + "통과! " + score + "점 · +" + rew + "元";
+        var ok = document.createElement("button"); ok.className="submit"; ok.textContent="확인"; ok.style.background="var(--good)";
+        ok.addEventListener("click", function(){ closeQuiz(); renderTabs(); renderPlan(); });
+        foot.appendChild(ok);
+        if (first) setTimeout(function(){ showToast((score===100?"⭐ 만점 통과!  ":"확인문제 통과!  ") + "+" + rew + "元"); }, 220);
+      } else {
+        res.className="result fail";
+        res.textContent = "통과 실패 · " + score + "점 (합격 80점). 정답 확인하고 다시 도전!";
+        var retry = document.createElement("button"); retry.className="submit"; retry.textContent="다시 도전";
+        retry.addEventListener("click", function(){ closeQuiz(); openQuiz(qid); });
+        var cl = document.createElement("button"); cl.className="submit"; cl.textContent="닫기"; cl.style.background="var(--ink-faint)";
+        cl.addEventListener("click", function(){ closeQuiz(); });
+        foot.appendChild(retry); foot.appendChild(cl);
+      }
+    });
+
+    modal.innerHTML = ""; modal.appendChild(wrap);
+    var ov = document.getElementById("overlay"); ov.classList.add("open"); ov.scrollTop = 0;
+  }
+  function closeQuiz(){ document.getElementById("overlay").classList.remove("open"); }
+  document.getElementById("overlay").addEventListener("click", function (e){ if (e.target === this) closeQuiz(); });
+  document.addEventListener("keydown", function (e){ if (e.key === "Escape") closeQuiz(); });
+
+  function currentRank(n){ var idx=0; for (var i=0;i<RANKS.length;i++) if (n>=RANKS[i].min) idx=i; return idx; }
+
+  function earnedTotal() {
+    var days = Object.keys(state.days).filter(function(k){ return state.days[k]; }).length;
+    var uq = unitQuizIds.filter(function(id){ return state.quiz[id]; }).length;
+    var mq = mockQuizIds.filter(function(id){ return state.quiz[id]; }).length;
+    return { days: days, quiz: uq+mq, total: days*state.rDay + uq*state.rQuiz + mq*state.rMock };
+  }
+
+  function updateHUD() {
+    var e = earnedTotal(), earned = e.total, goal = state.goal||0;
+    document.getElementById("totalYuan").textContent = earned;
+    document.getElementById("doneCount").textContent = e.days;
+    document.getElementById("quizCount").textContent = e.quiz;
+
+    var pct = goal>0 ? Math.min(100, Math.round(earned/goal*100)) : 100;
+    document.getElementById("thermoFill").style.width = pct + "%";
+    document.getElementById("thermoBike").style.left = pct + "%";
+    document.getElementById("goalCur").textContent = earned;
+    document.getElementById("goalTot").textContent = goal;
+    var reached = earned >= goal && goal > 0;
+    document.getElementById("goalCard").classList.toggle("reached", reached);
+    document.getElementById("goalPct").innerHTML = reached
+      ? "🎉 목표 달성! <b style='color:var(--good)'>자전거 GET!</b> 남은 확인문제 만점 ⭐도 채워 보자!"
+      : "달성률 <b>" + pct + "%</b> · 자전거까지 <b class='tabnum'>" + (goal-earned) + "</b>元 남았어요!";
+
+    var ri = currentRank(e.days), r = RANKS[ri];
+    document.getElementById("rankIco").textContent = r.ico;
+    document.getElementById("rankLv").textContent = "Lv." + (ri+1);
+    document.getElementById("rankName").textContent = r.name;
+    renderLadder(ri);
+
+    if (lastRank !== -1 && ri > lastRank) setTimeout(function(){ showToast("진급! " + r.ico + " " + r.name + " 달성!"); }, 600);
+    lastRank = ri;
+    if (lastGoalReached === false && reached) setTimeout(function(){ showToast("🚲 목표 " + goal + "元 달성! 자전거 GET!"); }, 850);
+    lastGoalReached = reached;
+  }
+
+  function renderLadder(cur) {
+    var el = document.getElementById("rungs"); el.innerHTML="";
+    RANKS.forEach(function (r,i) {
+      var cls = "rung" + (i<cur?" reached":"") + (i===cur?" current":"");
+      el.insertAdjacentHTML("beforeend", '<div class="'+cls+'"><div class="ico">'+r.ico+'</div><div class="rn">'+r.name+'</div><div class="rq">'+r.min+'일 이상</div></div>');
+    });
+  }
+
+  var toastTimer;
+  function showToast(txt) {
+    var t = document.getElementById("toast");
+    document.getElementById("toastText").textContent = txt;
+    t.classList.add("show"); clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2300);
+  }
+
+  var nameEl = document.getElementById("playerName");
+  nameEl.textContent = state.name || "우리 아들";
+  nameEl.addEventListener("blur", function(){ var v = nameEl.textContent.trim()||"우리 아들"; state.name=v; nameEl.textContent=v; save(); });
+  nameEl.addEventListener("keydown", function(e){ if (e.key==="Enter"){ e.preventDefault(); nameEl.blur(); } });
+
+  var edDay=document.getElementById("edDay"), edQuiz=document.getElementById("edQuiz"),
+      edMock=document.getElementById("edMock"), edGoal=document.getElementById("edGoal");
+  function syncEdit(){ edDay.value=state.rDay; edQuiz.value=state.rQuiz; edMock.value=state.rMock; edGoal.value=state.goal; }
+  function bindEdit(inp, key){ inp.addEventListener("change", function(){ var v=parseInt(inp.value,10); if(isNaN(v)||v<0)v=0; state[key]=v; save(); renderPlan(); }); }
+  bindEdit(edDay,"rDay"); bindEdit(edQuiz,"rQuiz"); bindEdit(edMock,"rMock"); bindEdit(edGoal,"goal");
+  document.getElementById("editBtn").addEventListener("click", function () {
+    editMode = !editMode;
+    this.classList.toggle("on", editMode);
+    this.textContent = editMode ? "✓ 수정 완료" : "✏️ 금액·목표 수정";
+    document.getElementById("editPanel").classList.toggle("open", editMode);
+    if (editMode) syncEdit();
+  });
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    if (confirm("모든 진행상황·점수·용돈 기록을 지우고 처음부터 시작할까요?")) {
+      state = { name:state.name, days:{}, quiz:{}, score:{}, perfect:{}, rDay:state.rDay, rQuiz:state.rQuiz, rMock:state.rMock, goal:state.goal };
+      lastRank=-1; lastGoalReached=false; save(); renderTabs(); renderPlan();
+    }
+  });
+
+  lastGoalReached = false;
+  renderTabs(); renderPlan();
+})();
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function (e) { console.warn('SW register failed', e); });
+    });
+  }
+</script>
+</body>
+</html>

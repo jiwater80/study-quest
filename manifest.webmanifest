@@ -1,0 +1,17 @@
+{
+  "name": "중1 1학기 완성 작전 · 취사병 전설이 되다",
+  "short_name": "완성작전",
+  "description": "중1 1학기 국어·과학·사회 14일 완성표 — 유튜브로 배우고 확인문제로 복습, 용돈 모아 자전거 사기.",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F3EEDF",
+  "theme_color": "#6E7B45",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
