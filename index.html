@@ -193,6 +193,52 @@
   .result.pass { color: var(--good); }
   .result.fail { color: var(--bad); }
 
+  /* ===== ROLE BAR / SYNC ===== */
+  .rolebar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; font-size: 13px; font-weight: 800; color: var(--ink-soft); }
+  .rolebar .who { background: var(--paper-2); border: 1.5px solid var(--line); border-radius: 20px; padding: 5px 12px; }
+  .rolebar .syncstate { font-size: 12px; font-weight: 800; color: var(--good); }
+  .rolebar .syncstate.saving { color: var(--ink-faint); } .rolebar .syncstate.err { color: var(--bad); }
+  .rolebar .live { font-size: 12px; font-weight: 900; color: var(--bad); }
+  .rolebar .rolebtn { margin-left: auto; }
+  .rolebtn { font: inherit; font-weight: 800; font-size: 12.5px; cursor: pointer; border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); border-radius: 9px; padding: 6px 12px; }
+  .rolebtn:hover { border-color: var(--flame); color: var(--ink); }
+
+  /* ===== PARENT BANNER ===== */
+  .parentbanner { display: none; background: linear-gradient(135deg, color-mix(in srgb, var(--flame) 12%, var(--card)), var(--card) 70%); border: 2px solid color-mix(in srgb, var(--flame) 40%, var(--line)); border-radius: 16px; padding: 15px 18px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  body.readonly .parentbanner { display: block; }
+  .pb-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .pb-title { font-weight: 900; font-size: 15px; }
+  .pb-time { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); }
+  .pb-top .rolebtn { margin-left: auto; }
+  .pb-note { font-size: 12px; color: var(--ink-faint); font-weight: 700; margin: 6px 0 10px; }
+  .act-list { display: flex; flex-direction: column; gap: 6px; max-height: 230px; overflow-y: auto; }
+  .act { display: flex; gap: 10px; align-items: baseline; font-size: 13px; background: var(--paper-2); border: 1px solid var(--line); border-radius: 9px; padding: 7px 11px; }
+  .act-t { font-size: 11px; font-weight: 800; color: var(--flame); white-space: nowrap; min-width: 50px; }
+  .act-x { font-weight: 600; }
+  .act-empty { font-size: 12.5px; color: var(--ink-faint); font-weight: 700; padding: 6px 2px; }
+
+  body.readonly .toolbar, body.readonly .editpanel { display: none !important; }
+  body.readonly .check label { pointer-events: none; opacity: .9; cursor: default; }
+  body.readonly .quizbtn { pointer-events: none; opacity: .92; }
+
+  /* ===== ROLE GATE ===== */
+  .rolegate { position: fixed; inset: 0; background: radial-gradient(900px 500px at 50% -10%, color-mix(in srgb, var(--olive) 22%, transparent), transparent 60%), var(--ground); display: none; align-items: center; justify-content: center; z-index: 90; padding: 24px 16px; overflow-y: auto; }
+  .rolegate.open { display: flex; }
+  .rg-card { max-width: 440px; width: 100%; text-align: center; }
+  .rg-tag { font-size: 12px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: var(--flame); }
+  .rg-title { font-size: clamp(23px, 6vw, 32px); font-weight: 900; margin: 6px 0 4px; text-wrap: balance; }
+  .rg-sub { color: var(--ink-soft); font-size: 13.5px; margin: 0 0 20px; }
+  .rg-btns { display: flex; flex-direction: column; gap: 11px; }
+  .rg-btn { display: flex; align-items: center; gap: 14px; text-align: left; font: inherit; cursor: pointer; background: var(--card); border: 2px solid var(--line); border-radius: 15px; padding: 15px 18px; box-shadow: var(--shadow); transition: transform .1s, border-color .15s; }
+  .rg-btn:hover { border-color: var(--flame); transform: translateY(-1px); }
+  .rg-btn:active { transform: scale(.98); }
+  .rg-btn:focus-visible { outline: 3px solid color-mix(in srgb, var(--flame) 55%, transparent); outline-offset: 2px; }
+  .rg-btn.student { border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 12%, var(--card)), var(--card) 70%); }
+  .rg-ico { font-size: 34px; line-height: 1; }
+  .rg-txt { display: flex; flex-direction: column; gap: 2px; }
+  .rg-name { font-weight: 900; font-size: 18px; }
+  .rg-desc { font-size: 12.5px; color: var(--ink-soft); font-weight: 700; }
+
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   @media (max-width: 560px) {
     .rankbadge { order: -1; }
@@ -214,6 +260,18 @@
 <div class="wrap">
   <div class="container">
 
+    <div class="rolebar" id="roleBar"></div>
+
+    <section class="parentbanner" id="parentBanner">
+      <div class="pb-top">
+        <span class="pb-title">👀 보호자 실시간 보기</span>
+        <span class="pb-time" id="bannerTime"></span>
+        <button class="rolebtn" id="pbRefresh">🔄 새로고침</button>
+      </div>
+      <div class="pb-note">한윤재가 완료·확인문제를 통과할 때마다 자동으로 반영돼요 (약 8초마다 갱신).</div>
+      <div class="act-list" id="activityList"></div>
+    </section>
+
     <section class="goal" id="goalCard">
       <div class="goal-top">
         <span class="goal-tag">🚲 최종 도전 · 자전거 원정대</span>
@@ -228,10 +286,7 @@
         <div>
           <span class="plan-tag">중1 1학기 · 14일 완성 작전</span>
           <h1>한윤재 <span class="flame">전설</span>이 되다</h1>
-          <p class="subtitle">
-            <span class="namebox"><span class="name" id="playerName" contenteditable="true" spellcheck="false">우리 아들</span> 한윤재</span>의 국어·과학·사회 1학기 완성표 —
-            매일 영상 보고 <b style="color:var(--good)">완료 체크</b>, 단원 끝엔 <b style="color:var(--flame)">확인문제</b>로 복습! 용돈 모아 자전거 사기 🚲
-          </p>
+          <p class="subtitle" id="subtitle"></p>
         </div>
         <div class="rankbadge">
           <div class="rank-emblem"><span id="rankIco">🥄</span><span class="lv" id="rankLv">Lv.1</span></div>
@@ -267,13 +322,26 @@
       <b>📝 확인문제(QUIZ):</b> 단원이 끝나는 날 <b>확인문제</b> 버튼이 있어요. 간단한 객관식이고 <b>채점하면 정답이 초록으로 표시</b>돼 바로 복습됩니다. <b>80점(10문제 중 8개) 이상</b>이면 통과·용돈 지급, 미달이면 영상 다시 보고 재도전!<br>
       <b>📺 영상:</b> 각 날짜의 <b>유튜브</b> 버튼을 누르면 그 내용 검색 결과가 열려요. 추천 채널: EBS 중학, 수박씨닷컴 등.<br>
       <b>📚 단원 안내:</b> 과학은 2015 개정 <b>중1 1학기</b>(지권·힘·생물·기체·상태 변화) 기준입니다. 국어·사회는 출판사·학교마다 순서가 조금 달라요 — 교과서 목차와 맞춰 참고하세요.<br>
-      <b>💾 자동 저장 · 조절:</b> 진행상황은 이 브라우저에 저장돼요. <b>금액·목표 수정</b>으로 용돈 단가·자전거 목표를, 이름은 위에서 바로 바꿀 수 있어요. (기본값: 하루 40 + 확인문제 60 + 모의 120 = 전부 완료 시 정확히 3000元)
+      <b>👨‍👩‍👦 3인 사용:</b> 첫 화면에서 <b>한윤재(학생)</b> 또는 <b>엄마·아빠(보호자)</b>를 선택해요. 한윤재의 진행은 <b>클라우드로 실시간 동기화</b>되어 엄마·아빠 폰에서 바로 확인돼요(약 8초마다 갱신). <b>금액·목표 수정</b>은 한윤재 화면에서만 가능해요. 진행상황은 클라우드에 저장돼 다른 기기·다른 폰에서도 이어집니다. (기본값: 하루 40 + 확인문제 60 + 모의 120 = 전부 완료 시 3000元)
     </p>
   </div>
 </div>
 
 <div id="toast"><span class="coin">🪙</span><span id="toastText"></span></div>
 <div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
+
+<div class="rolegate" id="roleGate">
+  <div class="rg-card">
+    <div class="rg-tag">누구인가요?</div>
+    <h2 class="rg-title">🥄 한윤재 전설이 되다</h2>
+    <p class="rg-sub">이 기기에서 사용할 사람을 선택하세요. (한 번만 고르면 기억돼요)</p>
+    <div class="rg-btns">
+      <button class="rg-btn student" data-role="student"><span class="rg-ico">🎓</span><span class="rg-txt"><span class="rg-name">한윤재</span><span class="rg-desc">학생 — 공부하고 용돈 모으기</span></span></button>
+      <button class="rg-btn" data-role="mom"><span class="rg-ico">👩</span><span class="rg-txt"><span class="rg-name">엄마</span><span class="rg-desc">보호자 — 실시간으로 지켜보기</span></span></button>
+      <button class="rg-btn" data-role="dad"><span class="rg-ico">👨</span><span class="rg-txt"><span class="rg-name">아빠</span><span class="rg-desc">보호자 — 실시간으로 지켜보기</span></span></button>
+    </div>
+  </div>
+</div>
 
 <script>
 (function () {
@@ -898,27 +966,62 @@
 
   var YT = "https://www.youtube.com/results?search_query=";
   var KEY = "chwisabyeong_plan_v4";
+  var ROLE_KEY = "chwisabyeong_role";
+  var BLOB = "https://jsonblob.com/api/jsonBlob/019fe213-6e88-73e3-b206-466f57a8f55d";
+  var role = null;
+  function isStudent(){ return role === "student"; }
 
   var DEF = { rDay:40, rQuiz:60, rMock:120, goal:3000 };
   var state = load();
   function load() {
     try { var raw = localStorage.getItem(KEY); if (raw) { var s = JSON.parse(raw); return normalize(s); } } catch (e) {}
-    return { name:"우리 아들", days:{}, quiz:{}, score:{}, perfect:{}, rDay:DEF.rDay, rQuiz:DEF.rQuiz, rMock:DEF.rMock, goal:DEF.goal };
+    return { name:"한윤재", days:{}, quiz:{}, score:{}, perfect:{}, rDay:DEF.rDay, rQuiz:DEF.rQuiz, rMock:DEF.rMock, goal:DEF.goal, log:[], updatedAt:0 };
   }
   function normalize(s) {
-    s.days = s.days||{}; s.quiz = s.quiz||{}; s.score = s.score||{}; s.perfect = s.perfect||{};
+    s.days = s.days||{}; s.quiz = s.quiz||{}; s.score = s.score||{}; s.perfect = s.perfect||{}; s.log = s.log||[];
     if (s.rDay==null) s.rDay=DEF.rDay; if (s.rQuiz==null) s.rQuiz=DEF.rQuiz;
     if (s.rMock==null) s.rMock=DEF.rMock; if (s.goal==null) s.goal=DEF.goal;
-    if (!s.name) s.name="우리 아들"; return s;
+    if (s.updatedAt==null) s.updatedAt=0;
+    if (!s.name) s.name="한윤재"; return s;
   }
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    if (isStudent()) scheduleCloud();
+  }
+
+  // ===== 클라우드 실시간 동기화 (jsonblob) =====
+  function cloudGet() {
+    return fetch(BLOB, { headers:{ "Accept":"application/json" }, cache:"no-store" })
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .catch(function(){ return null; });
+  }
+  var cloudTimer;
+  function scheduleCloud(){ clearTimeout(cloudTimer); cloudTimer = setTimeout(cloudPut, 700); }
+  function cloudPut(){
+    state.v = 4; state.updatedAt = Date.now(); setSync("saving");
+    fetch(BLOB, { method:"PUT", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(state) })
+      .then(function(r){ setSync(r.ok ? "ok" : "err"); })
+      .catch(function(){ setSync("err"); });
+  }
+  function setSync(s){
+    var el = document.getElementById("syncState"); if(!el) return;
+    el.textContent = s==="saving" ? "저장 중…" : s==="err" ? "⚠ 오프라인" : "☁ 동기화됨";
+    el.className = "syncstate " + s;
+  }
+  function logEvent(text){
+    if(!isStudent()) return;
+    state.log = state.log || [];
+    state.log.push({ t: Date.now(), text: text });
+    if(state.log.length > 30) state.log = state.log.slice(-30);
+  }
 
   // build quiz lookup + counts
-  var QUIZ = {}, unitQuizIds = [], mockQuizIds = [], TOTAL_DAYS = 0;
+  var QUIZ = {}, unitQuizIds = [], mockQuizIds = [], TOTAL_DAYS = 0, DAY_LABEL = {};
   SUBJECTS.forEach(function (sub) {
     sub.days.forEach(function (d) {
       TOTAL_DAYS++;
       d.dayId = sub.key + "-d" + d.n;
+      DAY_LABEL[d.dayId] = sub.name + " Day" + d.n + " · " + d.unit;
       if (d.quiz) {
         var qid = sub.key + "-q" + d.n;
         d.quizId = qid;
@@ -956,6 +1059,7 @@
   function renderPlan() {
     var sub = SUBJECTS.filter(function (s){ return s.key===activeTab; })[0];
     var host = document.getElementById("planHost");
+    var ro = !isStudent();
     var html = '<div class="plan"><div class="plan-head"><span>일자</span><span>단원</span><span>학습 내용</span><span class="c-done">완료</span></div>';
     sub.days.forEach(function (d) {
       var done = !!state.days[d.dayId];
@@ -965,7 +1069,7 @@
         var star = state.perfect[d.quizId] ? " ⭐" : "";
         var lbl = mock ? "모의 확인테스트" : "확인문제";
         var sc = passed ? " · " + (state.score[d.quizId]||0) + "점" : "";
-        acts += '<button class="quizbtn' + (mock?' mock':'') + (passed?' passed':'') + '" data-quiz="' + d.quizId + '">' +
+        acts += '<button class="quizbtn' + (mock?' mock':'') + (passed?' passed':'') + '"' + (ro?' disabled':'') + ' data-quiz="' + d.quizId + '">' +
           (passed?'✓ ':'📝 ') + lbl + sc + star + '</button>';
       }
       html += '<div class="day' + (done?' done':'') + '">' +
@@ -973,7 +1077,7 @@
         '<span class="uchip" style="--uc:' + d.uc + '">' + esc(d.unit) + '</span>' +
         '<div class="day-body"><div class="day-content">' + esc(d.content) + '</div>' +
           '<div class="day-actions">' + acts + '</div></div>' +
-        '<div class="check"><input type="checkbox" id="' + d.dayId + '"' + (done?' checked':'') + '>' +
+        '<div class="check"><input type="checkbox" id="' + d.dayId + '"' + (done?' checked':'') + (ro?' disabled':'') + '>' +
           '<label for="' + d.dayId + '" aria-label="완료 체크">✓</label>' +
           '<div class="day-reward">+' + state.rDay + '元</div></div>' +
         '</div>';
@@ -994,7 +1098,8 @@
   }
 
   function toggleDay(id, on) {
-    if (on) { state.days[id] = true; } else { delete state.days[id]; }
+    if (!isStudent()) return;
+    if (on) { state.days[id] = true; logEvent((DAY_LABEL[id]||"학습") + " 완료 +" + state.rDay + "元"); } else { delete state.days[id]; }
     save();
     if (on) { showToast("학습 완료!  +" + state.rDay + "元"); }
     renderTabs(); updateHUD();
@@ -1002,6 +1107,7 @@
   }
 
   function openQuiz(qid) {
+    if (!isStudent()) return;
     var Q = QUIZ[qid]; if (!Q) return;
     var modal = document.getElementById("modal");
     var need = passMark(Q.z), rew = quizReward(Q.kind);
@@ -1064,6 +1170,7 @@
         state.quiz[qid] = true;
         state.score[qid] = Math.max(state.score[qid]||0, score);
         if (score === 100) state.perfect[qid] = true;
+        if (first) logEvent(Q.title + " 통과 " + score + "점 +" + rew + "元" + (score===100?" ⭐":""));
         save();
         res.className="result pass";
         res.textContent = (score===100?"⭐ 만점! ":"🎉 ") + "통과! " + score + "점 · +" + rew + "元";
@@ -1145,11 +1252,6 @@
     toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2300);
   }
 
-  var nameEl = document.getElementById("playerName");
-  nameEl.textContent = state.name || "우리 아들";
-  nameEl.addEventListener("blur", function(){ var v = nameEl.textContent.trim()||"우리 아들"; state.name=v; nameEl.textContent=v; save(); });
-  nameEl.addEventListener("keydown", function(e){ if (e.key==="Enter"){ e.preventDefault(); nameEl.blur(); } });
-
   var edDay=document.getElementById("edDay"), edQuiz=document.getElementById("edQuiz"),
       edMock=document.getElementById("edMock"), edGoal=document.getElementById("edGoal");
   function syncEdit(){ edDay.value=state.rDay; edQuiz.value=state.rQuiz; edMock.value=state.rMock; edGoal.value=state.goal; }
@@ -1169,8 +1271,104 @@
     }
   });
 
-  lastGoalReached = false;
-  renderTabs(); renderPlan();
+  // ===== 역할 UI & 실시간 보기 =====
+  var ROLE_INFO = {
+    student: { ico:"🎓", label:"학생 · 한윤재" },
+    mom:     { ico:"👩", label:"보호자 · 엄마" },
+    dad:     { ico:"👨", label:"보호자 · 아빠" }
+  };
+
+  function renderRoleBar(){
+    var el = document.getElementById("roleBar"); if(!el) return;
+    var info = ROLE_INFO[role] || ROLE_INFO.student;
+    el.innerHTML = '<span class="who">' + info.ico + ' ' + info.label + '</span>' +
+      (isStudent()
+        ? '<span class="syncstate" id="syncState">☁ 동기화됨</span>'
+        : '<span class="live">🔴 실시간 보기</span>') +
+      '<button class="rolebtn" id="switchRole">역할 바꾸기</button>';
+    document.getElementById("switchRole").addEventListener("click", showRoleGate);
+  }
+
+  function applyRoleUI(){
+    document.body.classList.toggle("readonly", !isStudent());
+    renderRoleBar();
+    var sub = document.getElementById("subtitle");
+    if(sub){
+      sub.innerHTML = isStudent()
+        ? '<b style="color:var(--gold)">한윤재</b>의 국어·과학·사회 1학기 완성표 — 매일 영상 보고 <b style="color:var(--good)">완료 체크</b>, 단원 끝엔 <b style="color:var(--flame)">확인문제</b>로 복습! 용돈 모아 자전거 사기 🚲'
+        : '<b style="color:var(--gold)">한윤재</b> 학생의 진행 상황을 <b style="color:var(--flame)">실시간</b>으로 보고 있어요. 아래에서 완료·확인문제·용돈·활동을 확인하세요.';
+    }
+  }
+
+  function relTime(t){
+    if(!t) return "";
+    var s = Math.max(0, Math.floor((Date.now()-t)/1000));
+    if(s < 60) return "방금 전";
+    var m = Math.floor(s/60); if(m < 60) return m + "분 전";
+    var h = Math.floor(m/60); if(h < 24) return h + "시간 전";
+    return Math.floor(h/24) + "일 전";
+  }
+
+  function renderActivity(){
+    var box = document.getElementById("activityList"); if(!box) return;
+    var log = (state.log||[]).slice().reverse().slice(0,12);
+    if(!log.length){ box.innerHTML = '<div class="act-empty">아직 기록된 활동이 없어요. 한윤재가 시작하면 여기에 표시돼요.</div>'; return; }
+    box.innerHTML = log.map(function(ev){
+      return '<div class="act"><span class="act-t">' + relTime(ev.t) + '</span><span class="act-x">' + esc(ev.text) + '</span></div>';
+    }).join("");
+  }
+
+  function updateBanner(){
+    var t = document.getElementById("bannerTime"); if(!t) return;
+    t.textContent = state.updatedAt ? ("마지막 활동: " + relTime(state.updatedAt)) : "연결 대기 중…";
+  }
+
+  function renderAll(){ renderTabs(); renderPlan(); if(!isStudent()){ renderActivity(); updateBanner(); } }
+
+  var pollTimer, lastUpdatedAt = -1;
+  function poll(){
+    cloudGet().then(function(c){
+      if(c && typeof c === "object"){
+        if(c.updatedAt !== lastUpdatedAt){ lastUpdatedAt = c.updatedAt; state = normalize(c); renderAll(); }
+        else { updateBanner(); }
+      } else { updateBanner(); }
+    });
+  }
+  function startPolling(){
+    if(pollTimer) return;
+    pollTimer = setInterval(poll, 8000);
+    window.addEventListener("focus", poll);
+    document.addEventListener("visibilitychange", function(){ if(!document.hidden) poll(); });
+  }
+
+  function showRoleGate(){ document.getElementById("roleGate").classList.add("open"); }
+  function chooseRole(r){
+    role = r; try{ localStorage.setItem(ROLE_KEY, r); }catch(e){}
+    document.getElementById("roleGate").classList.remove("open");
+    enterApp();
+  }
+
+  function enterApp(){
+    applyRoleUI();
+    cloudGet().then(function(c){
+      if(c && typeof c === "object"){ state = normalize(c); lastUpdatedAt = c.updatedAt; }
+      lastRank = -1; lastGoalReached = false;
+      renderAll();
+      if(!isStudent()) startPolling();
+    });
+  }
+
+  // bind role gate + refresh
+  Array.prototype.forEach.call(document.querySelectorAll("#roleGate [data-role]"), function(b){
+    b.addEventListener("click", function(){ chooseRole(b.getAttribute("data-role")); });
+  });
+  var pbRefresh = document.getElementById("pbRefresh");
+  if(pbRefresh) pbRefresh.addEventListener("click", poll);
+
+  // start
+  try{ role = localStorage.getItem(ROLE_KEY); }catch(e){}
+  if(role==="student" || role==="mom" || role==="dad"){ enterApp(); }
+  else { showRoleGate(); }
 })();
 </script>
 <script>
