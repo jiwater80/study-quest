@@ -967,7 +967,7 @@
   var YT = "https://www.youtube.com/results?search_query=";
   var KEY = "chwisabyeong_plan_v4";
   var ROLE_KEY = "chwisabyeong_role";
-  var BLOB = "https://jsonblob.com/api/jsonBlob/019fe213-6e88-73e3-b206-466f57a8f55d";
+  var BLOB = "https://jsonblob.com/api/jsonBlob/019fe8d2-e08a-7e9b-9724-e2514d3635e5";
   var role = null;
   function isStudent(){ return role === "student"; }
 
@@ -1348,10 +1348,23 @@
     enterApp();
   }
 
+  function progressScore(s){
+    var d = s && s.days ? Object.keys(s.days).filter(function(k){ return s.days[k]; }).length : 0;
+    var q = s && s.quiz ? Object.keys(s.quiz).filter(function(k){ return s.quiz[k]; }).length : 0;
+    return d + q;
+  }
   function enterApp(){
     applyRoleUI();
     cloudGet().then(function(c){
-      if(c && typeof c === "object"){ state = normalize(c); lastUpdatedAt = c.updatedAt; }
+      if(isStudent()){
+        // 클라우드가 더 앞설 때만 채택. 아니면 로컬 유지 + 클라우드 재시딩(삭제·리셋 방어)
+        var cc = (c && typeof c === "object") ? progressScore(normalize(c)) : -1;
+        var lc = progressScore(state);
+        if(cc > lc){ state = normalize(c); lastUpdatedAt = c.updatedAt; }
+        else { lastUpdatedAt = state.updatedAt||0; scheduleCloud(); }
+      } else {
+        if(c && typeof c === "object"){ state = normalize(c); lastUpdatedAt = c.updatedAt; }
+      }
       lastRank = -1; lastGoalReached = false;
       renderAll();
       if(!isStudent()) startPolling();
