@@ -294,6 +294,14 @@
         <label>하루 완료<input type="number" min="0" step="5" id="edDay"></label>
         <label>확인문제 통과<input type="number" min="0" step="5" id="edQuiz"></label>
         <label>목표(元)<input type="number" min="0" step="100" id="edGoal"></label>
+        <div style="flex-basis:100%; border-top:1px dashed var(--line); padding-top:10px;">
+          <div style="font-size:12px; font-weight:800; color:var(--ink-soft); margin-bottom:6px;">💾 진행상황 백업/복원 — 코드를 메모·카톡에 저장해 두면 언제든 100% 복구돼요</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="rolebtn" id="backupBtn">📋 백업 코드 복사</button>
+            <button type="button" class="rolebtn" id="restoreBtn">↩ 코드로 복원</button>
+          </div>
+          <textarea id="backupBox" style="display:none; width:100%; min-height:60px; margin-top:8px; font:12px monospace; border:1.5px solid var(--line); border-radius:8px; padding:6px; background:var(--paper-2); color:var(--ink);"></textarea>
+        </div>
       </div>
     </section>
 
@@ -798,6 +806,33 @@
     }
   });
 
+  // ===== 백업/복원 (안전 보관용) =====
+  var backupBox = document.getElementById("backupBox");
+  document.getElementById("backupBtn").addEventListener("click", function () {
+    var code = JSON.stringify(state);
+    backupBox.style.display = "block"; backupBox.readOnly = true; backupBox.value = code;
+    try { backupBox.focus(); backupBox.select(); } catch (e) {}
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(function(){ showToast("✅ 백업 코드 복사됨! 메모·카톡에 저장해 두세요"); }, function(){ showToast("아래 코드를 길게 눌러 복사하세요"); });
+    } else { showToast("아래 코드를 길게 눌러 복사하세요"); }
+  });
+  document.getElementById("restoreBtn").addEventListener("click", function () {
+    if (backupBox.style.display !== "block" || backupBox.readOnly) {
+      backupBox.style.display = "block"; backupBox.readOnly = false; backupBox.value = "";
+      backupBox.placeholder = "백업 코드를 붙여넣고 '↩ 코드로 복원'을 한 번 더 누르세요";
+      try { backupBox.focus(); } catch (e) {}
+      showToast("백업 코드를 붙여넣고 '↩ 코드로 복원'을 다시 누르세요"); return;
+    }
+    try {
+      var obj = JSON.parse(backupBox.value.trim());
+      if (obj && obj.days && obj.quiz) {
+        state = normalize(obj); save();
+        lastRank = -1; lastGoalReached = false; renderTabs(); renderPlan();
+        backupBox.style.display = "none"; showToast("✅ 복원 완료!");
+      } else { showToast("올바른 백업 코드가 아니에요"); }
+    } catch (e) { showToast("코드를 확인해 주세요"); }
+  });
+
   var ROLE_INFO = {
     student: { ico:"🎓", label:"학생 · 한윤재" },
     mom:     { ico:"👩", label:"보호자 · 엄마" },
@@ -905,6 +940,20 @@
   });
   var pbRefresh = document.getElementById("pbRefresh");
   if(pbRefresh) pbRefresh.addEventListener("click", poll);
+
+  // ===== 저장 안전장치: 브라우저가 이 앱 데이터를 자동으로 지우지 않도록 '영구 저장' 요청 =====
+  (function requestPersist(){
+    try {
+      if (navigator.storage && navigator.storage.persist) {
+        navigator.storage.persisted().then(function(already){
+          if (!already) return navigator.storage.persist();
+          return true;
+        }).then(function(granted){
+          window.__persist = granted; // true면 브라우저가 이 앱 저장을 안 지움
+        }).catch(function(){});
+      }
+    } catch (e) {}
+  })();
 
   try{ role = localStorage.getItem(ROLE_KEY); }catch(e){}
   if(role==="student" || role==="mom" || role==="dad"){ enterApp(); }
