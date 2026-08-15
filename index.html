@@ -13,13 +13,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="완성작전">
 <meta name="mobile-web-app-capable" content="yes">
-<title>중1 1학기 완성 작전 · 한윤재 전설이 되다</title>
+<title>중1 2학기 완성 작전 · 한윤재 전설이 되다</title>
 <style>
   :root {
     --paper: #F3EEDF; --paper-2: #EAE2CD; --ink: #23261C; --ink-soft: #4C503E;
     --ink-faint: #7A7C68; --line: #D6CCB0; --card: #FBF8EF; --flame: #EA5D24;
     --flame-deep: #C7481A; --gold: #C8962B; --gold-bright: #E6B23E; --olive: #6E7B45;
-    --olive-deep: #55602F; --good: #4E7A3E; --bad: #C24A38; --ground: #F3EEDF;
+    --olive-deep: #55602F; --good: #4E7A3E; --bad: #C24A38; --steel: #5A6472; --ground: #F3EEDF;
     --shadow: 0 1px 2px rgba(35,38,28,.08), 0 8px 24px rgba(35,38,28,.06); --stamp: rgba(199,72,26,.9);
   }
   @media (prefers-color-scheme: dark) {
@@ -27,7 +27,7 @@
       --paper: #17190F; --paper-2: #1E2115; --ink: #ECE7D4; --ink-soft: #BEB9A2;
       --ink-faint: #8A8770; --line: #34381F; --card: #202315; --flame: #F4732F;
       --flame-deep: #E05A1D; --gold: #E6B23E; --gold-bright: #F5C960; --olive: #8A9857;
-      --olive-deep: #6E7B45; --good: #74A85E; --bad: #E27060; --ground: #12140B;
+      --olive-deep: #6E7B45; --good: #74A85E; --bad: #E27060; --steel: #8391A3; --ground: #12140B;
       --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35); --stamp: rgba(244,115,47,.92);
     }
   }
@@ -35,14 +35,14 @@
     --paper: #F3EEDF; --paper-2: #EAE2CD; --ink: #23261C; --ink-soft: #4C503E;
     --ink-faint: #7A7C68; --line: #D6CCB0; --card: #FBF8EF; --flame: #EA5D24;
     --flame-deep: #C7481A; --gold: #C8962B; --gold-bright: #E6B23E; --olive: #6E7B45;
-    --olive-deep: #55602F; --good: #4E7A3E; --bad: #C24A38; --ground: #F3EEDF;
+    --olive-deep: #55602F; --good: #4E7A3E; --bad: #C24A38; --steel: #5A6472; --ground: #F3EEDF;
     --shadow: 0 1px 2px rgba(35,38,28,.08), 0 8px 24px rgba(35,38,28,.06); --stamp: rgba(199,72,26,.9);
   }
   :root[data-theme="dark"] {
     --paper: #17190F; --paper-2: #1E2115; --ink: #ECE7D4; --ink-soft: #BEB9A2;
     --ink-faint: #8A8770; --line: #34381F; --card: #202315; --flame: #F4732F;
     --flame-deep: #E05A1D; --gold: #E6B23E; --gold-bright: #F5C960; --olive: #8A9857;
-    --olive-deep: #6E7B45; --good: #74A85E; --bad: #E27060; --ground: #12140B;
+    --olive-deep: #6E7B45; --good: #74A85E; --bad: #E27060; --steel: #8391A3; --ground: #12140B;
     --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35); --stamp: rgba(244,115,47,.92);
   }
 
@@ -58,10 +58,52 @@
   .label { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
   .tabnum { font-variant-numeric: tabular-nums; }
 
-  /* BIKE GOAL */
+  .rolebar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; font-size: 13px; font-weight: 800; color: var(--ink-soft); }
+  .rolebar .who { background: var(--paper-2); border: 1.5px solid var(--line); border-radius: 20px; padding: 5px 12px; }
+  .rolebar .syncstate { font-size: 12px; font-weight: 800; color: var(--good); }
+  .rolebar .syncstate.saving { color: var(--ink-faint); } .rolebar .syncstate.err { color: var(--bad); } .rolebar .syncstate.local { color: var(--steel); }
+  .rolebar .live { font-size: 12px; font-weight: 900; color: var(--bad); }
+  .rolebar .rolebtn { margin-left: auto; }
+  .rolebtn { font: inherit; font-weight: 800; font-size: 12.5px; cursor: pointer; border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); border-radius: 9px; padding: 6px 12px; }
+  .rolebtn:hover { border-color: var(--flame); color: var(--ink); }
+
+  .parentbanner { display: none; background: linear-gradient(135deg, color-mix(in srgb, var(--flame) 12%, var(--card)), var(--card) 70%); border: 2px solid color-mix(in srgb, var(--flame) 40%, var(--line)); border-radius: 16px; padding: 15px 18px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  body.readonly .parentbanner { display: block; }
+  .pb-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .pb-title { font-weight: 900; font-size: 15px; }
+  .pb-time { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); }
+  .pb-top .rolebtn { margin-left: auto; }
+  .pb-note { font-size: 12px; color: var(--ink-faint); font-weight: 700; margin: 6px 0 10px; }
+  .act-list { display: flex; flex-direction: column; gap: 6px; max-height: 230px; overflow-y: auto; }
+  .act { display: flex; gap: 10px; align-items: baseline; font-size: 13px; background: var(--paper-2); border: 1px solid var(--line); border-radius: 9px; padding: 7px 11px; }
+  .act-t { font-size: 11px; font-weight: 800; color: var(--flame); white-space: nowrap; min-width: 50px; }
+  .act-x { font-weight: 600; }
+  .act-empty { font-size: 12.5px; color: var(--ink-faint); font-weight: 700; padding: 6px 2px; }
+
+  body.readonly .toolbar, body.readonly .editpanel { display: none !important; }
+  body.readonly .check label { pointer-events: none; opacity: .9; cursor: default; }
+  body.readonly .quizbtn { pointer-events: none; opacity: .92; }
+
+  .rolegate { position: fixed; inset: 0; background: radial-gradient(900px 500px at 50% -10%, color-mix(in srgb, var(--olive) 22%, transparent), transparent 60%), var(--ground); display: none; align-items: center; justify-content: center; z-index: 90; padding: 24px 16px; overflow-y: auto; }
+  .rolegate.open { display: flex; }
+  .rg-card { max-width: 440px; width: 100%; text-align: center; }
+  .rg-tag { font-size: 12px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: var(--flame); }
+  .rg-title { font-size: clamp(23px, 6vw, 32px); font-weight: 900; margin: 6px 0 4px; text-wrap: balance; }
+  .rg-sub { color: var(--ink-soft); font-size: 13.5px; margin: 0 0 20px; }
+  .rg-btns { display: flex; flex-direction: column; gap: 11px; }
+  .rg-btn { display: flex; align-items: center; gap: 14px; text-align: left; font: inherit; cursor: pointer; background: var(--card); border: 2px solid var(--line); border-radius: 15px; padding: 15px 18px; box-shadow: var(--shadow); transition: transform .1s, border-color .15s; }
+  .rg-btn:hover { border-color: var(--flame); transform: translateY(-1px); }
+  .rg-btn:active { transform: scale(.98); }
+  .rg-btn:focus-visible { outline: 3px solid color-mix(in srgb, var(--flame) 55%, transparent); outline-offset: 2px; }
+  .rg-btn.student { border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 12%, var(--card)), var(--card) 70%); }
+  .rg-ico { font-size: 34px; line-height: 1; }
+  .rg-txt { display: flex; flex-direction: column; gap: 2px; }
+  .rg-name { font-weight: 900; font-size: 18px; }
+  .rg-desc { font-size: 12.5px; color: var(--ink-soft); font-weight: 700; }
+
   .goal { background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 16%, var(--card)), var(--card) 60%); border: 2px solid color-mix(in srgb, var(--gold) 55%, var(--line)); border-radius: 16px; padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 14px; }
   .goal-top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .goal-tag { font-weight: 900; letter-spacing: .08em; font-size: 12px; color: var(--flame); text-transform: uppercase; }
+  .goal-tag { font-weight: 900; letter-spacing: .04em; font-size: 12px; color: var(--flame); text-transform: uppercase; }
   .goal-num { margin-left: auto; font-weight: 900; font-size: 20px; }
   .goal-num .cur { color: var(--gold); }
   .goal-num .yuan { font-size: 14px; }
@@ -71,7 +113,6 @@
   .goal-pct { margin-top: 7px; font-size: 12.5px; color: var(--ink-soft); font-weight: 700; }
   .goal.reached { border-color: var(--good); }
 
-  /* HUD */
   .hud { background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; padding: 18px 20px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
   .hud::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent 0 22px, color-mix(in srgb, var(--olive) 6%, transparent) 22px 24px); pointer-events: none; opacity: .5; }
   .hud-top { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; position: relative; }
@@ -80,9 +121,6 @@
   h1 { font-size: clamp(21px, 4.6vw, 32px); margin: 4px 0 2px; letter-spacing: -.01em; text-wrap: balance; font-weight: 900; }
   h1 .flame { color: var(--flame); }
   .subtitle { color: var(--ink-soft); font-size: 13.5px; max-width: 58ch; }
-  .namebox { display: inline-flex; align-items: baseline; gap: 5px; }
-  .name { font-weight: 900; color: var(--gold); border-bottom: 2px dashed color-mix(in srgb, var(--gold) 50%, transparent); cursor: text; outline: none; padding: 0 2px; }
-  .name:focus { background: color-mix(in srgb, var(--gold) 14%, transparent); }
   .rankbadge { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 118px; }
   .rank-emblem { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 50% 35%, var(--olive), var(--olive-deep)); border: 3px solid var(--gold-bright); box-shadow: inset 0 2px 6px rgba(255,255,255,.15), var(--shadow); font-size: 30px; position: relative; }
   .rank-emblem .lv { position: absolute; bottom: -6px; right: -8px; background: var(--flame); color: #fff; font-weight: 900; font-size: 11px; padding: 2px 7px; border-radius: 20px; border: 2px solid var(--card); }
@@ -99,39 +137,36 @@
   .btn:active { transform: translateY(1px); }
   .btn.on { background: var(--flame); border-color: var(--flame); color: #fff; }
   .btn.ghost { color: var(--ink-faint); }
-  .btn:focus-visible, .name:focus-visible { outline: 3px solid color-mix(in srgb, var(--flame) 55%, transparent); outline-offset: 2px; }
+  .btn:focus-visible { outline: 3px solid color-mix(in srgb, var(--flame) 55%, transparent); outline-offset: 2px; }
 
   .editpanel { display: none; gap: 12px; flex-wrap: wrap; margin-top: 12px; padding: 13px 14px; background: var(--paper-2); border: 1.5px dashed var(--gold); border-radius: 12px; position: relative; }
   .editpanel.open { display: flex; }
   .editpanel label { font-size: 12px; font-weight: 800; color: var(--ink-soft); display: flex; flex-direction: column; gap: 4px; }
   .editpanel input { width: 92px; font: inherit; font-weight: 900; color: var(--gold); font-size: 15px; background: var(--card); border: 1.5px solid var(--gold); border-radius: 8px; padding: 5px 8px; text-align: right; }
 
-  /* TABS */
   .tabs { display: flex; gap: 8px; margin: 26px 0 4px; flex-wrap: wrap; }
-  .tab { font: inherit; font-weight: 900; font-size: 15px; cursor: pointer; border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); border-radius: 12px 12px 0 0; padding: 11px 18px; display: flex; align-items: center; gap: 8px; border-bottom: none; position: relative; top: 1px; }
-  .tab .cnt { font-size: 11.5px; font-weight: 800; color: var(--ink-faint); background: var(--paper-2); border-radius: 20px; padding: 1px 8px; }
+  .tab { font: inherit; font-weight: 900; font-size: 14px; cursor: pointer; border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); border-radius: 12px 12px 0 0; padding: 10px 15px; display: flex; align-items: center; gap: 7px; border-bottom: none; position: relative; top: 1px; }
+  .tab .cnt { font-size: 11px; font-weight: 800; color: var(--ink-faint); background: var(--paper-2); border-radius: 20px; padding: 1px 8px; }
   .tab.active { color: var(--ink); border-color: var(--flame); border-bottom: 2px solid var(--card); }
   .tab.active .bar { position: absolute; left: 0; right: 0; top: -1.5px; height: 3px; background: var(--flame); border-radius: 3px; }
 
   .plan { background: var(--card); border: 1.5px solid var(--line); border-radius: 0 14px 14px 14px; box-shadow: var(--shadow); overflow: hidden; }
-  .plan-head { display: grid; grid-template-columns: 52px 96px 1fr 88px; gap: 10px; padding: 11px 16px; border-bottom: 1.5px solid var(--line); background: var(--paper-2); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
+  .plan-head { display: grid; grid-template-columns: 52px 100px 1fr 88px; gap: 10px; padding: 11px 16px; border-bottom: 1.5px solid var(--line); background: var(--paper-2); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
   .plan-head .c-done { text-align: center; }
-
-  .day { display: grid; grid-template-columns: 52px 96px 1fr 88px; gap: 10px; padding: 13px 16px; border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); align-items: center; }
+  .day { display: grid; grid-template-columns: 52px 100px 1fr 88px; gap: 10px; padding: 13px 16px; border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); align-items: center; }
   .day:last-child { border-bottom: none; }
   .day.done { background: color-mix(in srgb, var(--good) 6%, transparent); }
   .day-n { font-weight: 900; font-size: 13px; color: var(--ink-soft); }
   .day-n .d { display: block; font-size: 10px; color: var(--ink-faint); font-weight: 800; letter-spacing: .08em; }
-  .uchip { align-self: start; font-weight: 900; font-size: 12px; padding: 3px 9px; border-radius: 20px; border: 1.5px solid; color: var(--uc); border-color: color-mix(in srgb, var(--uc) 48%, var(--line)); background: color-mix(in srgb, var(--uc) 13%, transparent); white-space: nowrap; text-align: center; }
+  .uchip { align-self: start; font-weight: 900; font-size: 12px; padding: 3px 9px; border-radius: 20px; border: 1.5px solid; color: var(--uc); border-color: color-mix(in srgb, var(--uc) 48%, var(--line)); background: color-mix(in srgb, var(--uc) 13%, transparent); text-align: center; }
   .day-body { min-width: 0; }
   .day-content { font-size: 14px; font-weight: 600; line-height: 1.4; }
   .day-actions { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 8px; }
   .yt { font: inherit; font-weight: 800; font-size: 12px; text-decoration: none; color: var(--flame-deep); border: 1.5px solid color-mix(in srgb, var(--flame) 40%, var(--line)); padding: 5px 10px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; background: color-mix(in srgb, var(--flame) 7%, transparent); transition: background .15s; }
   .yt:hover { background: color-mix(in srgb, var(--flame) 16%, transparent); }
   .yt svg { width: 15px; height: 15px; }
-  .quizbtn { font: inherit; font-weight: 800; font-size: 12px; cursor: pointer; border: 1.5px solid var(--olive); background: var(--card); color: var(--olive-deep); padding: 5px 11px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; }
+  .quizbtn { font: inherit; font-weight: 800; font-size: 12px; cursor: pointer; border: 1.5px solid var(--flame); background: color-mix(in srgb, var(--flame) 9%, var(--card)); color: var(--flame-deep); padding: 5px 11px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; }
   .quizbtn.passed { border-color: var(--good); color: var(--good); background: color-mix(in srgb, var(--good) 9%, var(--card)); }
-  .quizbtn.mock { border-color: var(--flame); color: var(--flame-deep); background: color-mix(in srgb, var(--flame) 9%, var(--card)); }
   .quizbtn:hover { filter: brightness(1.03); }
   .quizbtn:active { transform: scale(.97); }
 
@@ -164,7 +199,6 @@
   #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   #toast .coin { color: var(--gold-bright); }
 
-  /* QUIZ MODAL */
   .overlay { position: fixed; inset: 0; background: rgba(10,11,7,.6); backdrop-filter: blur(3px); display: none; align-items: flex-start; justify-content: center; z-index: 80; overflow-y: auto; padding: 24px 14px; }
   .overlay.open { display: flex; }
   .modal { background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); width: 100%; max-width: 560px; padding: 22px; }
@@ -193,52 +227,6 @@
   .result.pass { color: var(--good); }
   .result.fail { color: var(--bad); }
 
-  /* ===== ROLE BAR / SYNC ===== */
-  .rolebar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; font-size: 13px; font-weight: 800; color: var(--ink-soft); }
-  .rolebar .who { background: var(--paper-2); border: 1.5px solid var(--line); border-radius: 20px; padding: 5px 12px; }
-  .rolebar .syncstate { font-size: 12px; font-weight: 800; color: var(--good); }
-  .rolebar .syncstate.saving { color: var(--ink-faint); } .rolebar .syncstate.err { color: var(--bad); }
-  .rolebar .live { font-size: 12px; font-weight: 900; color: var(--bad); }
-  .rolebar .rolebtn { margin-left: auto; }
-  .rolebtn { font: inherit; font-weight: 800; font-size: 12.5px; cursor: pointer; border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); border-radius: 9px; padding: 6px 12px; }
-  .rolebtn:hover { border-color: var(--flame); color: var(--ink); }
-
-  /* ===== PARENT BANNER ===== */
-  .parentbanner { display: none; background: linear-gradient(135deg, color-mix(in srgb, var(--flame) 12%, var(--card)), var(--card) 70%); border: 2px solid color-mix(in srgb, var(--flame) 40%, var(--line)); border-radius: 16px; padding: 15px 18px; box-shadow: var(--shadow); margin-bottom: 14px; }
-  body.readonly .parentbanner { display: block; }
-  .pb-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .pb-title { font-weight: 900; font-size: 15px; }
-  .pb-time { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); }
-  .pb-top .rolebtn { margin-left: auto; }
-  .pb-note { font-size: 12px; color: var(--ink-faint); font-weight: 700; margin: 6px 0 10px; }
-  .act-list { display: flex; flex-direction: column; gap: 6px; max-height: 230px; overflow-y: auto; }
-  .act { display: flex; gap: 10px; align-items: baseline; font-size: 13px; background: var(--paper-2); border: 1px solid var(--line); border-radius: 9px; padding: 7px 11px; }
-  .act-t { font-size: 11px; font-weight: 800; color: var(--flame); white-space: nowrap; min-width: 50px; }
-  .act-x { font-weight: 600; }
-  .act-empty { font-size: 12.5px; color: var(--ink-faint); font-weight: 700; padding: 6px 2px; }
-
-  body.readonly .toolbar, body.readonly .editpanel { display: none !important; }
-  body.readonly .check label { pointer-events: none; opacity: .9; cursor: default; }
-  body.readonly .quizbtn { pointer-events: none; opacity: .92; }
-
-  /* ===== ROLE GATE ===== */
-  .rolegate { position: fixed; inset: 0; background: radial-gradient(900px 500px at 50% -10%, color-mix(in srgb, var(--olive) 22%, transparent), transparent 60%), var(--ground); display: none; align-items: center; justify-content: center; z-index: 90; padding: 24px 16px; overflow-y: auto; }
-  .rolegate.open { display: flex; }
-  .rg-card { max-width: 440px; width: 100%; text-align: center; }
-  .rg-tag { font-size: 12px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: var(--flame); }
-  .rg-title { font-size: clamp(23px, 6vw, 32px); font-weight: 900; margin: 6px 0 4px; text-wrap: balance; }
-  .rg-sub { color: var(--ink-soft); font-size: 13.5px; margin: 0 0 20px; }
-  .rg-btns { display: flex; flex-direction: column; gap: 11px; }
-  .rg-btn { display: flex; align-items: center; gap: 14px; text-align: left; font: inherit; cursor: pointer; background: var(--card); border: 2px solid var(--line); border-radius: 15px; padding: 15px 18px; box-shadow: var(--shadow); transition: transform .1s, border-color .15s; }
-  .rg-btn:hover { border-color: var(--flame); transform: translateY(-1px); }
-  .rg-btn:active { transform: scale(.98); }
-  .rg-btn:focus-visible { outline: 3px solid color-mix(in srgb, var(--flame) 55%, transparent); outline-offset: 2px; }
-  .rg-btn.student { border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 12%, var(--card)), var(--card) 70%); }
-  .rg-ico { font-size: 34px; line-height: 1; }
-  .rg-txt { display: flex; flex-direction: column; gap: 2px; }
-  .rg-name { font-weight: 900; font-size: 18px; }
-  .rg-desc { font-size: 12.5px; color: var(--ink-soft); font-weight: 700; }
-
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   @media (max-width: 560px) {
     .rankbadge { order: -1; }
@@ -264,27 +252,27 @@
 
     <section class="parentbanner" id="parentBanner">
       <div class="pb-top">
-        <span class="pb-title">👀 보호자 실시간 보기</span>
+        <span class="pb-title">👀 보호자 보기</span>
         <span class="pb-time" id="bannerTime"></span>
         <button class="rolebtn" id="pbRefresh">🔄 새로고침</button>
       </div>
-      <div class="pb-note">한윤재가 완료·확인문제를 통과할 때마다 자동으로 반영돼요 (약 8초마다 갱신).</div>
+      <div class="pb-note" id="pbNote">한윤재가 완료·확인문제를 통과할 때마다 반영돼요.</div>
       <div class="act-list" id="activityList"></div>
     </section>
 
     <section class="goal" id="goalCard">
       <div class="goal-top">
-        <span class="goal-tag">🚲 최종 도전 · 자전거 원정대</span>
-        <span class="goal-num"><span class="cur tabnum" id="goalCur">0</span> / <span class="tabnum" id="goalTot">3000</span><span class="yuan">元</span></span>
+        <span class="goal-tag">🎁 최종 목표 · 용돈 모으기</span>
+        <span class="goal-num"><span class="cur tabnum" id="goalCur">0</span> / <span class="tabnum" id="goalTot">1000</span><span class="yuan">元</span></span>
       </div>
-      <div class="thermo"><div class="thermo-fill" id="thermoFill"></div><span class="thermo-bike" id="thermoBike">🚲</span></div>
+      <div class="thermo"><div class="thermo-fill" id="thermoFill"></div><span class="thermo-bike" id="thermoBike">🎁</span></div>
       <div class="goal-pct" id="goalPct"></div>
     </section>
 
     <section class="hud">
       <div class="hud-top">
         <div>
-          <span class="plan-tag">중1 1학기 · 14일 완성 작전</span>
+          <span class="plan-tag">중1 2학기 · 완성 작전</span>
           <h1>한윤재 <span class="flame">전설</span>이 되다</h1>
           <p class="subtitle" id="subtitle"></p>
         </div>
@@ -294,9 +282,9 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat gold"><div class="big"><span class="tabnum" id="totalYuan">0</span> <span class="yuan">元</span></div><div class="cap">누적 획득 용돈</div></div>
-        <div class="stat"><div class="big"><span class="tabnum" id="doneCount">0</span> <span style="font-size:15px;color:var(--ink-faint)">/ 42일</span></div><div class="cap">완료한 학습일</div></div>
-        <div class="stat"><div class="big"><span class="tabnum" id="quizCount">0</span> <span style="font-size:15px;color:var(--ink-faint)">/ 19</span></div><div class="cap">통과한 확인문제</div></div>
+        <div class="stat gold"><div class="big"><span class="tabnum" id="totalYuan">0</span> <span class="yuan">元</span></div><div class="cap">모은 용돈</div></div>
+        <div class="stat"><div class="big"><span class="tabnum" id="doneCount">0</span> <span style="font-size:15px;color:var(--ink-faint)">/ 30일</span></div><div class="cap">완료한 학습일</div></div>
+        <div class="stat"><div class="big"><span class="tabnum" id="quizCount">0</span> <span style="font-size:15px;color:var(--ink-faint)">/ 5</span></div><div class="cap">통과한 확인문제</div></div>
       </div>
       <div class="toolbar">
         <button class="btn" id="editBtn">✏️ 금액·목표 수정</button>
@@ -305,8 +293,7 @@
       <div class="editpanel" id="editPanel">
         <label>하루 완료<input type="number" min="0" step="5" id="edDay"></label>
         <label>확인문제 통과<input type="number" min="0" step="5" id="edQuiz"></label>
-        <label>모의테스트<input type="number" min="0" step="10" id="edMock"></label>
-        <label>자전거 목표(元)<input type="number" min="0" step="100" id="edGoal"></label>
+        <label>목표(元)<input type="number" min="0" step="100" id="edGoal"></label>
       </div>
     </section>
 
@@ -319,10 +306,10 @@
     </section>
 
     <p class="note">
-      <b>📝 확인문제(QUIZ):</b> 단원이 끝나는 날 <b>확인문제</b> 버튼이 있어요. 간단한 객관식이고 <b>채점하면 정답이 초록으로 표시</b>돼 바로 복습됩니다. <b>80점(10문제 중 8개) 이상</b>이면 통과·용돈 지급, 미달이면 영상 다시 보고 재도전!<br>
-      <b>📺 영상:</b> 각 날짜의 <b>유튜브</b> 버튼을 누르면 그 내용 검색 결과가 열려요. 추천 채널: EBS 중학, 수박씨닷컴 등.<br>
-      <b>📚 단원 안내:</b> 과학은 2015 개정 <b>중1 1학기</b>(지권·힘·생물·기체·상태 변화) 기준입니다. 국어·사회는 출판사·학교마다 순서가 조금 달라요 — 교과서 목차와 맞춰 참고하세요.<br>
-      <b>👨‍👩‍👦 3인 사용:</b> 첫 화면에서 <b>한윤재(학생)</b> 또는 <b>엄마·아빠(보호자)</b>를 선택해요. 한윤재의 진행은 <b>클라우드로 실시간 동기화</b>되어 엄마·아빠 폰에서 바로 확인돼요(약 8초마다 갱신). <b>금액·목표 수정</b>은 한윤재 화면에서만 가능해요. 진행상황은 클라우드에 저장돼 다른 기기·다른 폰에서도 이어집니다. (기본값: 하루 40 + 확인문제 60 + 모의 120 = 전부 완료 시 3000元)
+      <b>📝 확인문제(QUIZ):</b> 각 과목 마지막 날 <b>단원 확인문제 20문항</b>(단원별 4문항씩). 객관식이고 <b>채점하면 정답이 초록으로 표시</b>돼 바로 복습돼요. <b>80점(20문제 중 16개) 이상</b>이면 통과·용돈 지급, 미달이면 영상부터 다시 도전!<br>
+      <b>📺 영상:</b> 각 날짜의 <b>유튜브</b> 버튼으로 그 단원 검색이 열려요. (EBS 중학, 수박씨닷컴 등)<br>
+      <b>📚 과목:</b> 국어·과학·사회·국사(역사)·수학 — 중1 2학기, 가장 널리 쓰는 교과 기준(미래엔·비상 계열). 출판사에 따라 단원 순서가 조금 다를 수 있어요.<br>
+      <b>💾 저장:</b> 진행상황은 <b>이 기기에 안전하게 저장</b>됩니다(자동). <b>3인 실시간(엄마·아빠 보기)</b>은 무료 Firebase 연결 시 켜져요. (전부 완료 시 정확히 1000元)
     </p>
   </div>
 </div>
@@ -333,12 +320,12 @@
 <div class="rolegate" id="roleGate">
   <div class="rg-card">
     <div class="rg-tag">누구인가요?</div>
-    <h2 class="rg-title">🥄 한윤재 전설이 되다</h2>
+    <h2 class="rg-title">🥄 한윤재 전설이 되다 (중1 2학기)</h2>
     <p class="rg-sub">이 기기에서 사용할 사람을 선택하세요. (한 번만 고르면 기억돼요)</p>
     <div class="rg-btns">
       <button class="rg-btn student" data-role="student"><span class="rg-ico">🎓</span><span class="rg-txt"><span class="rg-name">한윤재</span><span class="rg-desc">학생 — 공부하고 용돈 모으기</span></span></button>
-      <button class="rg-btn" data-role="mom"><span class="rg-ico">👩</span><span class="rg-txt"><span class="rg-name">엄마</span><span class="rg-desc">보호자 — 실시간으로 지켜보기</span></span></button>
-      <button class="rg-btn" data-role="dad"><span class="rg-ico">👨</span><span class="rg-txt"><span class="rg-name">아빠</span><span class="rg-desc">보호자 — 실시간으로 지켜보기</span></span></button>
+      <button class="rg-btn" data-role="mom"><span class="rg-ico">👩</span><span class="rg-txt"><span class="rg-name">엄마</span><span class="rg-desc">보호자 — 지켜보기</span></span></button>
+      <button class="rg-btn" data-role="dad"><span class="rg-ico">👨</span><span class="rg-txt"><span class="rg-name">아빠</span><span class="rg-desc">보호자 — 지켜보기</span></span></button>
     </div>
   </div>
 </div>
@@ -349,629 +336,172 @@
 
   var RANKS = [
     { min:0,  ico:"🥄", name:"이등병 한윤재" },
-    { min:8,  ico:"🍳", name:"일병 한윤재" },
-    { min:16, ico:"🔪", name:"상병 한윤재" },
-    { min:24, ico:"🍲", name:"병장 한윤재" },
-    { min:33, ico:"👨‍🍳", name:"취사반장" },
-    { min:42, ico:"🏆", name:"전설의 한윤재" }
+    { min:6,  ico:"🍳", name:"일병 한윤재" },
+    { min:12, ico:"🔪", name:"상병 한윤재" },
+    { min:18, ico:"🍲", name:"병장 한윤재" },
+    { min:24, ico:"👨‍🍳", name:"취사반장" },
+    { min:30, ico:"🏆", name:"전설의 한윤재" }
   ];
 
-  // color palette for unit chips
-  var C = { earth:"#B5842F", force:"#3B82C4", bio:"#4E8A3E", gas:"#7C6BD4", state:"#1FA3A3",
-            poem:"#C4557A", novel:"#E0662B", gram:"#7C6BD4", read:"#6E8B45", talk:"#1FA3A3",
-            world:"#3B82C4", climate:"#1FA3A3", land:"#B5842F", culture:"#C4557A", disaster:"#D4A017", resource:"#6E8B45",
-            review:"#8A8A7A", final:"#4E8A3E" };
-
-  // SUBJECTS. day: {n, unit, uc, content, ytq, quiz?}
-  // quiz: {kind:'unit'|'mock', z:[[question,[opts],ansIndex], ...]}
+  // day: {n, unit, uc, content, ytq, quiz?}  quiz: {kind:'unit', z:[[q,[opts],ansIdx],...]}
   var SUBJECTS = [
-    {
-      "key": "kor",
-      "name": "국어",
-      "days": [
-        {
-          "n": 1,
-          "unit": "시",
-          "uc": "#C4557A",
-          "content": "비유하는 표현(직유·은유)과 상징 이해하기",
-          "ytq": "시 비유 직유 은유 상징"
-        },
-        {
-          "n": 2,
-          "unit": "시",
-          "uc": "#C4557A",
-          "content": "운율과 심상, 시적 화자의 정서 파악",
-          "ytq": "시 운율 심상 시적 화자 정서",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["'~같이 / ~처럼'을 써서 직접 빗대는 표현법은?",["은유법","직유법","의인법","반복법"],1],
-              ["'내 마음은 호수요'처럼 'A는 B다' 형식으로 빗대는 표현법은?",["직유법","은유법","과장법","대구법"],1],
-              ["사람이 아닌 대상을 사람처럼 표현하는 방법은?",["의인법","직유법","설의법","도치법"],0],
-              ["시를 읽을 때 머릿속에 떠오르는 감각적 이미지는?",["운율","심상","주제","행"],1],
-              ["시에서 말하는 이를 뜻하는 말은?",["시적 화자","작가","독자","청자"],0],
-              ["같은 말이나 구절을 되풀이하여 운율을 형성하는 표현법은?",["반복법","직유법","은유법","과장법"],0],
-              ["시에서 느껴지는 말의 규칙적인 가락(리듬)을 무엇이라 하나요?",["운율","심상","배경","갈등"],0],
-              ["코로 맡는 냄새와 관련되어 떠오르는 심상은?",["시각적 심상","청각적 심상","후각적 심상","미각적 심상"],2],
-              ["사물을 실제보다 크게(또는 작게) 부풀려 표현하는 방법은?",["과장법","직유법","대구법","반복법"],0],
-              ["시에서 한 줄을 뜻하는 말은?",["행","연","운율","심상"],0]
-            ]
-          }
-        },
-        {
-          "n": 3,
-          "unit": "소설",
-          "uc": "#E0662B",
-          "content": "소설의 3요소(인물·사건·배경)와 서술자",
-          "ytq": "소설 인물 사건 배경 서술자"
-        },
-        {
-          "n": 4,
-          "unit": "소설",
-          "uc": "#E0662B",
-          "content": "갈등의 종류와 구성 단계(발단-전개-위기-절정-결말)",
-          "ytq": "소설 갈등 구성 단계 발단 전개 위기 절정 결말",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["소설의 3요소가 아닌 것은?",["인물","사건","배경","가격"],3],
-              ["소설에서 이야기를 들려주는 사람은?",["작가","서술자","독자","주인공"],1],
-              ["인물의 마음속에서 일어나는 갈등을 무엇이라 하나요?",["내적 갈등","외적 갈등","사회적 갈등","자연과의 갈등"],0],
-              ["소설 구성 단계의 순서로 옳은 것은?",["발단-전개-위기-절정-결말","전개-발단-결말-위기","절정-발단-전개-결말","결말-절정-위기-전개"],0],
-              ["사건이 일어나는 시간과 장소를 뜻하는 것은?",["배경","인물","절정","문체"],0],
-              ["인물과 인물, 인물과 사회 사이에서 일어나는 갈등은?",["외적 갈등","내적 갈등","없음","심리 갈등"],0],
-              ["소설 구성 단계 중 갈등이 최고조에 이르는 단계는?",["발단","전개","절정","결말"],2],
-              ["소설 구성 단계 중 인물과 배경이 소개되는 첫 단계는?",["발단","위기","절정","결말"],0],
-              ["서술자가 작품 밖에서 인물의 속마음까지 다 아는 시점은?",["전지적 작가 시점","1인칭 주인공 시점","작가 관찰자 시점","없음"],0],
-              ["소설이 현실에 있음 직한 일을 상상하여 꾸며 쓴다는 성격은?",["허구성","사실성","운율","압축성"],0]
-            ]
-          }
-        },
-        {
-          "n": 5,
-          "unit": "문법",
-          "uc": "#7C6BD4",
-          "content": "언어의 본질(자의성·사회성·역사성·창조성)",
-          "ytq": "언어의 본질 자의성 사회성 역사성 창조성"
-        },
-        {
-          "n": 6,
-          "unit": "문법",
-          "uc": "#7C6BD4",
-          "content": "음운의 체계 — 자음과 모음, 음운의 특성",
-          "ytq": "음운 자음 모음 체계",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["말의 뜻을 구별해 주는 가장 작은 소리의 단위는?",["음운","단어","문장","문단"],0],
-              ["우리말 단모음은 모두 몇 개인가요?",["7개","9개","10개","14개"],2],
-              ["소리 낼 때 공기 흐름이 막히거나 좁아지며 나는 소리는?",["모음","자음","받침","음절"],1],
-              ["말소리와 의미 사이에 필연적 관계가 없다는 언어의 특성은?",["자의성","사회성","역사성","규칙성"],0],
-              ["다음 중 자음이 아닌 것은?",["ㄱ","ㅅ","ㅏ","ㅁ"],2],
-              ["언어는 그 말을 쓰는 사람들 사이의 약속이라는 특성은?",["사회성","자의성","역사성","창조성"],0],
-              ["시간이 지나며 새말이 생기고 옛말이 사라지는 언어의 특성은?",["역사성","사회성","자의성","규칙성"],0],
-              ["우리말 자음은 모두 몇 개인가요?",["14개","19개","10개","24개"],1],
-              ["소리 낼 때 공기가 막힘 없이 나오는 소리는?",["모음","자음","된소리","거센소리"],0],
-              ["'ㅐ, ㅔ'처럼 소리 내는 동안 입 모양이 변하지 않는 모음은?",["단모음","이중 모음","반모음","자음"],0]
-            ]
-          }
-        },
-        {
-          "n": 7,
-          "unit": "읽기",
-          "uc": "#6E8B45",
-          "content": "예측하며 읽기, 읽기의 과정과 방법",
-          "ytq": "예측하며 읽기 읽기 과정 방법"
-        },
-        {
-          "n": 8,
-          "unit": "읽기",
-          "uc": "#6E8B45",
-          "content": "설명하는 글과 설명 방법(정의·예시·비교·분류)",
-          "ytq": "설명하는 글 설명 방법 정의 예시 비교 분류",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["어떤 말의 뜻을 밝혀 설명하는 방법은?",["정의","예시","비교","분류"],0],
-              ["구체적인 예를 들어 설명하는 방법은?",["대조","예시","정의","분석"],1],
-              ["여러 대상을 일정한 기준으로 나누어 설명하는 방법은?",["분류","인과","비교","정의"],0],
-              ["설명하는 글의 목적으로 알맞은 것은?",["정보 전달","설득","감정 표현","명령"],0],
-              ["글을 읽기 전 제목·그림으로 내용을 미리 짐작하는 것은?",["예측하며 읽기","훑어만 보기","베껴 쓰기","무조건 외우기"],0],
-              ["두 대상의 공통점을 들어 설명하는 방법은?",["비교","대조","인과","정의"],0],
-              ["차이점을 중심으로 설명하는 방법은?",["비교","대조","예시","분류"],1],
-              ["원인과 결과의 관계로 설명하는 방법은?",["인과","예시","정의","비교"],0],
-              ["전체를 부분으로 나누어 설명하는 방법은?",["분석","정의","예시","대조"],0],
-              ["글의 내용을 요약할 때 알맞은 방법은?",["중심 내용을 간추린다","모두 그대로 옮긴다","새 내용을 지어낸다","결론만 뺀다"],0]
-            ]
-          }
-        },
-        {
-          "n": 9,
-          "unit": "쓰기",
-          "uc": "#6E8B45",
-          "content": "경험을 담은 글(자기 성찰), 통일성 있는 글쓰기",
-          "ytq": "경험을 담은 글 자기 성찰 통일성 글쓰기"
-        },
-        {
-          "n": 10,
-          "unit": "화법",
-          "uc": "#1FA3A3",
-          "content": "공감하며 대화하기, 듣기의 바른 태도",
-          "ytq": "공감하며 대화하기 경청 듣기 태도",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["상대의 처지와 마음에 공감하며 나누는 대화는?",["공감적 대화","토론","발표","연설"],0],
-              ["상대의 말을 잘 듣는 바람직한 태도는?",["공감하며 경청하기","딴짓하기","중간에 끊기","비웃기"],0],
-              ["대화에서 상대를 배려하는 말하기로 알맞은 것은?",["상대 입장을 이해하며 말하기","무시하기","명령하기","비난하기"],0],
-              ["글의 모든 문장이 하나의 주제로 모이는 성질은?",["통일성","창의성","다양성","속도"],0],
-              ["자신의 경험·생각을 돌아보며 쓰는 글은?",["자기 성찰 글(수필)","설명문","광고","안내문"],0],
-              ["대화에서 고개를 끄덕이거나 맞장구치며 듣는 태도는?",["반응하며 듣기","딴청 부리기","침묵하기","반박만 하기"],0],
-              ["상대의 기분이 상하지 않게 부드럽게 표현하는 말하기는?",["공손한(배려하는) 말하기","명령하는 말하기","비난하는 말하기","무시하는 말하기"],0],
-              ["자기 성찰 글을 쓸 때 알맞은 태도는?",["솔직하게 자신을 돌아본다","남을 흉본다","사실을 숨긴다","자랑만 한다"],0],
-              ["보통 한 문단은 몇 개의 중심 생각을 담나요?",["하나","둘","셋","없음"],0],
-              ["통일성 있는 글을 쓰려면 어떻게 해야 하나요?",["주제에서 벗어난 문장을 뺀다","아무 문장이나 넣는다","문장을 길게만 쓴다","제목을 지운다"],0]
-            ]
-          }
-        },
-        {
-          "n": 11,
-          "unit": "어휘·문법",
-          "uc": "#7C6BD4",
-          "content": "단어의 짜임과 어휘 확장 (심화·보충)",
-          "ytq": "단어의 짜임 어근 접사 어휘 확장"
-        },
-        {
-          "n": 12,
-          "unit": "종합",
-          "uc": "#4E8A3E",
-          "content": "시·소설·문법·읽기·화법 핵심 개념 한 번에 정리",
-          "ytq": "중1 국어 1학기 핵심 정리"
-        },
-        {
-          "n": 13,
-          "unit": "복습",
-          "uc": "#8A8A7A",
-          "content": "취약 영역 다시 보기 + 오답노트 정리",
-          "ytq": "중1 국어 1학기 총정리 오답"
-        },
-        {
-          "n": 14,
-          "unit": "총정리",
-          "uc": "#4E8A3E",
-          "content": "전체 복습 + 모의 확인테스트",
-          "ytq": "중1 국어 1학기 총정리 문제",
-          "quiz": {
-            "kind": "mock",
-            "z": [
-              ["'~처럼'을 써서 직접 빗대는 표현법은?",["은유법","직유법","의인법","반복법"],1],
-              ["소설에서 이야기를 들려주는 사람은?",["작가","서술자","독자","주인공"],1],
-              ["뜻을 구별해 주는 가장 작은 소리의 단위는?",["음운","단어","문장","음절"],0],
-              ["어떤 말의 뜻을 밝혀 설명하는 방법은?",["정의","예시","비교","분류"],0],
-              ["글의 모든 문장이 하나의 주제로 모이는 성질은?",["통일성","창의성","다양성","속도"],0],
-              ["상대의 마음에 공감하며 나누는 대화는?",["공감적 대화","토론","발표","명령"],0],
-              ["소설의 3요소가 아닌 것은?",["인물","사건","배경","가격"],3],
-              ["우리말 단모음은 모두 몇 개인가요?",["7개","9개","10개","14개"],2],
-              ["사람이 아닌 것을 사람처럼 표현하는 방법은?",["직유법","은유법","의인법","반복법"],2],
-              ["소설 구성에서 갈등이 최고조에 이르는 단계는?",["발단","전개","절정","결말"],2]
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "key": "sci",
-      "name": "과학",
-      "days": [
-        {
-          "n": 1,
-          "unit": "지권의 변화",
-          "uc": "#B5842F",
-          "content": "지구계와 지권의 층상 구조(지각·맨틀·외핵·내핵)",
-          "ytq": "지권의 변화 지구 내부 구조 지각 맨틀 핵"
-        },
-        {
-          "n": 2,
-          "unit": "지권의 변화",
-          "uc": "#B5842F",
-          "content": "암석의 종류(화성암·퇴적암·변성암)와 암석의 순환",
-          "ytq": "암석 화성암 퇴적암 변성암 암석 순환"
-        },
-        {
-          "n": 3,
-          "unit": "지권의 변화",
-          "uc": "#B5842F",
-          "content": "광물과 토양, 풍화 작용",
-          "ytq": "광물 토양 풍화 작용",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["지구 내부를 바깥에서 안쪽 순서로 옳게 나열한 것은?",["지각-맨틀-외핵-내핵","맨틀-지각-핵","핵-맨틀-지각","지각-핵-맨틀"],0],
-              ["마그마가 식어 굳어 만들어진 암석은?",["퇴적암","화성암","변성암","광물"],1],
-              ["자갈·모래·진흙이 쌓여 굳어진 암석은?",["화성암","변성암","퇴적암","현무암"],2],
-              ["암석이 잘게 부서지고 성분이 변하는 작용은?",["풍화","융기","분출","퇴적"],0],
-              ["암석을 이루는 알갱이로, 일정한 성분을 가진 것은?",["토양","광물","화석","지층"],1],
-              ["높은 열과 압력을 받아 성질이 변한 암석은?",["화성암","퇴적암","변성암","광물"],2],
-              ["마그마가 지표 부근에서 빠르게 식어 결정이 작은 화성암은?",["화산암","심성암","퇴적암","변성암"],0],
-              ["지구 내부에서 가장 두꺼워 부피가 가장 큰 층은?",["지각","맨틀","외핵","내핵"],1],
-              ["지층 속에 옛 생물의 몸이나 흔적이 남은 것은?",["화석","광물","마그마","금속"],0],
-              ["암석이 잘게 부서져 오랜 시간 쌓이면 만들어지는 것은?",["토양","마그마","화석","금속"],0]
-            ]
-          }
-        },
-        {
-          "n": 4,
-          "unit": "여러 가지 힘",
-          "uc": "#3B82C4",
-          "content": "중력과 탄성력",
-          "ytq": "여러 가지 힘 중력 탄성력"
-        },
-        {
-          "n": 5,
-          "unit": "여러 가지 힘",
-          "uc": "#3B82C4",
-          "content": "마찰력과 부력, 힘의 단위",
-          "ytq": "마찰력 부력 힘의 단위 뉴턴",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["지구가 물체를 지구 중심으로 끌어당기는 힘은?",["마찰력","중력","탄성력","부력"],1],
-              ["변형된 물체가 원래대로 돌아가려는 힘은?",["탄성력","중력","마찰력","전기력"],0],
-              ["두 물체가 닿아 움직임을 방해하는 힘은?",["중력","부력","마찰력","자기력"],2],
-              ["물이나 공기가 물체를 위로 밀어 올리는 힘은?",["중력","부력","마찰력","탄성력"],1],
-              ["힘의 크기를 나타내는 단위는?",["N(뉴턴)","kg","m","℃"],0],
-              ["같은 물체라도 달에서는 지구보다 중력이 어떻게 되나요?",["약해진다","강해진다","같다","없어진다"],0],
-              ["마찰력의 방향으로 알맞은 것은?",["물체의 운동을 방해하는 방향","운동 방향과 같은 방향","항상 위쪽","항상 아래쪽"],0],
-              ["표면이 거칠수록 마찰력은 어떻게 되나요?",["커진다","작아진다","없어진다","변화 없다"],0],
-              ["물에 잠긴 물체가 가벼워 보이는 까닭은?",["부력 때문","중력이 사라져서","마찰력 때문","자기력 때문"],0],
-              ["용수철에 매단 추가 무거울수록 용수철은?",["더 많이 늘어난다","줄어든다","변화 없다","끊어진다"],0]
-            ]
-          }
-        },
-        {
-          "n": 6,
-          "unit": "생물의 다양성",
-          "uc": "#4E8A3E",
-          "content": "생물다양성의 의미와 생물의 분류",
-          "ytq": "생물의 다양성 생물다양성 분류"
-        },
-        {
-          "n": 7,
-          "unit": "생물의 다양성",
-          "uc": "#4E8A3E",
-          "content": "생물다양성 보전과 생물 자원의 이용",
-          "ytq": "생물다양성 보전 생물 자원 이용",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["생물다양성이 가장 높은 지역은?",["사막","극지방","열대우림","빙하"],2],
-              ["생물을 비슷한 특징끼리 무리 짓는 것을 무엇이라 하나요?",["분류","진화","적응","번식"],0],
-              ["환경에 알맞게 몸의 특징이 변해 살아가는 것은?",["적응","멸종","분류","변성"],0],
-              ["생물다양성이 줄어드는 원인이 아닌 것은?",["서식지 파괴","환경 오염","남획","자연 보호"],3],
-              ["생물 분류 단계 중 가장 큰(넓은) 무리는?",["종","속","계","과"],2],
-              ["서로 짝짓기하여 자손을 남길 수 있는 무리의 기본 단위는?",["종","계","문","강"],0],
-              ["사막여우의 큰 귀처럼 환경에 맞게 나타난 특징은?",["적응의 결과","우연","학습","오염"],0],
-              ["생물다양성을 지키기 위한 노력으로 알맞은 것은?",["서식지 보호","남획","오염","무분별한 개발"],0],
-              ["생물다양성이 높을수록 생태계는 어떻게 되나요?",["안정적이다","불안정하다","사라진다","관계없다"],0],
-              ["생물을 분류하는 기본 기준으로 알맞은 것은?",["생김새·특징의 공통점","이름의 길이","색깔만","가격"],0]
-            ]
-          }
-        },
-        {
-          "n": 8,
-          "unit": "기체의 성질",
-          "uc": "#7C6BD4",
-          "content": "입자의 운동과 확산·증발",
-          "ytq": "기체의 성질 입자 운동 확산 증발"
-        },
-        {
-          "n": 9,
-          "unit": "기체의 성질",
-          "uc": "#7C6BD4",
-          "content": "압력과 부피(보일 법칙), 온도와 부피(샤를 법칙)",
-          "ytq": "보일 법칙 샤를 법칙 압력 부피 온도",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["기체 입자의 운동에 대한 옳은 설명은?",["끊임없이 스스로 움직인다","정지해 있다","서로 붙어 있다","모양이 고정되어 있다"],0],
-              ["온도가 일정할 때 압력이 커지면 기체의 부피는?",["커진다","작아진다","변화 없다","사라진다"],1],
-              ["압력이 일정할 때 온도가 높아지면 기체의 부피는?",["작아진다","커진다","없어진다","일정하다"],1],
-              ["압력과 부피의 관계를 나타낸 법칙은?",["보일 법칙","샤를 법칙","옴 법칙","뉴턴 법칙"],0],
-              ["향수 냄새가 방 안에 퍼지는 것처럼 입자가 스스로 퍼지는 현상은?",["확산","응고","융해","부력"],0],
-              ["액체 표면에서 입자가 기체로 되어 날아가는 현상은?",["증발","확산","응고","융해"],0],
-              ["온도와 부피의 관계를 나타낸 법칙은?",["보일 법칙","샤를 법칙","옴 법칙","뉴턴 법칙"],1],
-              ["기체 입자 사이의 거리는 고체·액체와 비교해 어떤가요?",["매우 멀다","매우 가깝다","서로 붙어 있다","똑같다"],0],
-              ["풍선을 햇볕에 두면 부피가 커지는 까닭은?",["온도가 높아져 입자 운동이 활발해져서","압력이 커져서","입자 수가 늘어나서","무거워져서"],0],
-              ["온도가 높아지면 확산의 속도는 어떻게 되나요?",["빨라진다","느려진다","멈춘다","변화 없다"],0]
-            ]
-          }
-        },
-        {
-          "n": 10,
-          "unit": "상태 변화",
-          "uc": "#1FA3A3",
-          "content": "물질의 세 가지 상태와 상태 변화",
-          "ytq": "물질의 상태 고체 액체 기체 상태 변화"
-        },
-        {
-          "n": 11,
-          "unit": "상태 변화",
-          "uc": "#1FA3A3",
-          "content": "상태 변화와 열에너지(흡수·방출)",
-          "ytq": "상태 변화 열에너지 흡수 방출",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["고체가 액체로 변하는 현상은?",["융해","응고","기화","승화"],0],
-              ["액체가 기체로 변하는 현상은?",["액화","기화","승화","융해"],1],
-              ["기체가 액체로 변하는 현상은?",["기화","액화","응고","융해"],1],
-              ["드라이아이스처럼 고체가 바로 기체로 변하는 현상은?",["융해","승화","응고","액화"],1],
-              ["상태 변화가 일어날 때 함께 나타나는 것은?",["열에너지의 흡수 또는 방출","질량의 증가","원자의 생성","색의 변화"],0],
-              ["액체가 고체로 변하는 현상은?",["융해","응고","기화","승화"],1],
-              ["얼음이 녹을 때(융해) 열에너지는 어떻게 되나요?",["흡수한다","방출한다","변화 없다","사라진다"],0],
-              ["수증기가 물이 될 때(액화) 열에너지는 어떻게 되나요?",["흡수한다","방출한다","변화 없다","생성한다"],1],
-              ["상태 변화가 일어나도 변하지 않는 것은?",["물질의 질량(양)","부피","상태","모양"],0],
-              ["겨울철 유리창 안쪽에 물방울이 맺히는 것은 어떤 상태 변화인가요?",["융해","액화","승화","응고"],1]
-            ]
-          }
-        },
-        {
-          "n": 12,
-          "unit": "종합",
-          "uc": "#4E8A3E",
-          "content": "5개 단원 핵심 개념 한 번에 정리",
-          "ytq": "중1 과학 1학기 핵심 정리"
-        },
-        {
-          "n": 13,
-          "unit": "복습",
-          "uc": "#8A8A7A",
-          "content": "취약 단원 다시 보기 + 오답노트 정리",
-          "ytq": "중1 과학 1학기 총정리 오답"
-        },
-        {
-          "n": 14,
-          "unit": "총정리",
-          "uc": "#4E8A3E",
-          "content": "전체 복습 + 모의 확인테스트",
-          "ytq": "중1 과학 1학기 총정리 문제",
-          "quiz": {
-            "kind": "mock",
-            "z": [
-              ["지구 내부에서 가장 바깥층은?",["지각","맨틀","외핵","내핵"],0],
-              ["물체를 지구 중심으로 끌어당기는 힘은?",["부력","중력","탄성력","마찰력"],1],
-              ["생물 분류에서 가장 큰 단위는?",["종","계","과","속"],1],
-              ["온도가 일정할 때 압력이 커지면 기체 부피는?",["커진다","작아진다","변화 없다","사라진다"],1],
-              ["고체가 액체로 변하는 현상은?",["융해","응고","기화","승화"],0],
-              ["기체가 액체로 변하는 현상은?",["기화","액화","응고","융해"],1],
-              ["마그마가 식어 굳어 만들어진 암석은?",["퇴적암","화성암","변성암","광물"],1],
-              ["힘의 크기를 나타내는 단위는?",["N(뉴턴)","kg","L","℃"],0],
-              ["액체가 기체로 변하는 현상은?",["융해","응고","기화","액화"],2],
-              ["온도가 높아지면 기체 입자의 운동은?",["활발해진다","느려진다","멈춘다","변화 없다"],0]
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "key": "soc",
-      "name": "사회",
-      "days": [
-        {
-          "n": 1,
-          "unit": "내가 사는 세계",
-          "uc": "#3B82C4",
-          "content": "위치 표현(위도·경도)과 지도 읽기",
-          "ytq": "내가 사는 세계 위도 경도 지도"
-        },
-        {
-          "n": 2,
-          "unit": "내가 사는 세계",
-          "uc": "#3B82C4",
-          "content": "지리 정보와 위치에 따른 생활 모습",
-          "ytq": "지리 정보 위치 시간대 생활",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["적도를 기준으로 남북의 위치를 나타내는 좌표는?",["경도","위도","해발","방위"],1],
-              ["본초 자오선을 기준으로 동서 위치를 나타내는 좌표는?",["위도","경도","등고선","축척"],1],
-              ["위도 0°에 해당하는 선은?",["적도","본초 자오선","날짜 변경선","회귀선"],0],
-              ["지도에서 실제 거리를 줄인 정도를 나타내는 것은?",["축척","방위","기호","등고선"],0],
-              ["경도 15°마다 나는 시간 차이는?",["1시간","2시간","30분","3시간"],0],
-              ["지구의 북극과 남극을 잇는 세로선은?",["경선(자오선)","위선","적도","등고선"],0],
-              ["위도가 같은 지점을 이은 가로선은?",["위선","경선","본초 자오선","축척"],0],
-              ["세계 시간의 기준이 되는, 경도 0°가 지나는 곳은?",["영국 그리니치(본초 자오선)","서울","적도","북극"],0],
-              ["지도에서 방향을 나타내는 표시는?",["방위표","축척","등고선","기호"],0],
-              ["위도가 높아져 극지방으로 갈수록 기온은 대체로 어떻게 되나요?",["낮아진다","높아진다","변화 없다","일정하다"],0]
-            ]
-          }
-        },
-        {
-          "n": 3,
-          "unit": "세계의 기후",
-          "uc": "#1FA3A3",
-          "content": "세계의 다양한 기후(열대·건조·온대·냉대·한대)",
-          "ytq": "세계의 기후 열대 건조 온대 냉대 한대"
-        },
-        {
-          "n": 4,
-          "unit": "세계의 기후",
-          "uc": "#1FA3A3",
-          "content": "기후에 따른 사람들의 생활 모습",
-          "ytq": "기후에 따른 생활 모습 의식주",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["일 년 내내 덥고 비가 많이 내리는 기후는?",["한대","열대","건조","냉대"],1],
-              ["비가 매우 적어 사막이 나타나는 기후는?",["온대","열대","건조","한대"],2],
-              ["사계절이 비교적 뚜렷하고 사람이 많이 사는 기후는?",["온대","한대","건조","열대우림"],0],
-              ["극지방처럼 몹시 추운 기후는?",["열대","건조","온대","한대"],3],
-              ["기후에 영향을 주는 요소가 아닌 것은?",["위도","해발 고도","바다와의 거리","사람의 이름"],3],
-              ["여름에 비가 많아 벼농사에 유리한, 계절풍의 영향을 받는 기후 지역은?",["온대 계절풍 지역","사막","극지방","빙하 지역"],0],
-              ["열대 기후 지역 사람들의 옷차림으로 알맞은 것은?",["얇고 통풍이 잘되는 옷","두꺼운 털옷","솜을 넣은 옷","가죽 장화"],0],
-              ["사막(건조 기후)에서 물을 얻을 수 있는 곳은?",["오아시스","빙하","갯벌","폭포"],0],
-              ["한대 기후 지역에서 순록을 기르며 이동하는 생활 방식은?",["유목","벼농사","관광업","원예 농업"],0],
-              ["적도 부근처럼 위도가 낮은 지역의 기후는?",["열대","한대","냉대","건조"],0]
-            ]
-          }
-        },
-        {
-          "n": 5,
-          "unit": "지형",
-          "uc": "#B5842F",
-          "content": "자연으로 떠나는 여행 — 산지·해안 지형",
-          "ytq": "산지 해안 지형 침식 퇴적"
-        },
-        {
-          "n": 6,
-          "unit": "지형",
-          "uc": "#B5842F",
-          "content": "화산·카르스트 등 특수 지형과 관광",
-          "ytq": "화산 지형 카르스트 지형 관광",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["석회암이 빗물에 녹아 만들어진 지형은?",["화산 지형","카르스트 지형","빙하 지형","해안 지형"],1],
-              ["파도의 침식으로 해안에 만들어지는 절벽은?",["삼각주","해식 절벽","사구","범람원"],1],
-              ["강물이 운반한 흙이 하구에 쌓여 만들어진 평평한 지형은?",["삼각주","고원","단층","빙하"],0],
-              ["마그마가 분출하여 만들어진 지형은?",["화산 지형","평야","분지","해안"],0],
-              ["지형을 '깎아 내는' 작용은?",["퇴적","침식","융기","분출"],1],
-              ["강물이 산지를 깎아 만든, 물이 흐르는 골짜기는?",["하천(계곡)","삼각주","사막","빙하"],0],
-              ["파도가 모래를 쌓아 만든 해안의 모래사장은?",["사빈","해식 절벽","카르스트","화산"],0],
-              ["화산에서 분출한 용암이 굳어 만들어진 넓고 평평한 지형은?",["용암 대지","삼각주","갯벌","사구"],0],
-              ["석회 동굴 천장에서 아래로 뾰족하게 자란 것은?",["종유석","삼각주","사구","빙하"],0],
-              ["지형을 만드는 힘 중 흙과 모래를 '쌓는' 작용은?",["퇴적","침식","풍화","분출"],0]
-            ]
-          }
-        },
-        {
-          "n": 7,
-          "unit": "문화",
-          "uc": "#C4557A",
-          "content": "세계의 문화 지역과 문화의 다양성",
-          "ytq": "세계의 문화 지역 문화 다양성"
-        },
-        {
-          "n": 8,
-          "unit": "문화",
-          "uc": "#C4557A",
-          "content": "문화 변동과 문화 접촉, 문화 이해 태도",
-          "ytq": "문화 변동 문화 접촉 문화 상대주의",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["한 사회의 구성원이 공유하는 생활 양식은?",["문화","법","정치","경제"],0],
-              ["자연환경이 비슷해 생활 모습이 유사하게 나타나는 지역은?",["문화 지역","행정 구역","기후대","시간대"],0],
-              ["서로 다른 문화가 만나 새로운 문화가 나타나는 현상은?",["문화 변동","문화 획일화","문화 소멸","편견"],0],
-              ["각 문화를 그 사회의 입장에서 이해하려는 태도는?",["문화 상대주의","자문화 중심주의","문화 사대주의","편견"],0],
-              ["문화의 특징으로 알맞은 것은?",["후천적으로 학습된다","타고난다","전혀 변하지 않는다","개인만의 것이다"],0],
-              ["자기 문화를 기준으로 다른 문화를 낮게 평가하는 태도는?",["자문화 중심주의","문화 상대주의","다문화주의","존중"],0],
-              ["문화를 사회 구성원 대부분이 함께 나눈다는 특징은?",["공유성","개별성","고정성","우월성"],0],
-              ["시간이 지나며 문화가 조금씩 바뀌는 특징은?",["변동성","불변성","개인성","우월성"],0],
-              ["서로 다른 문화가 어울려 함께 살아가는 사회는?",["다문화 사회","단일 사회","폐쇄 사회","계급 사회"],0],
-              ["의식주·언어·종교 등은 모두 무엇에 해당하나요?",["문화","자연","본능","유전"],0]
-            ]
-          }
-        },
-        {
-          "n": 9,
-          "unit": "자연재해",
-          "uc": "#D4A017",
-          "content": "자연재해의 종류(지진·화산·홍수·가뭄·폭설)",
-          "ytq": "자연재해 지진 화산 홍수 가뭄 폭설"
-        },
-        {
-          "n": 10,
-          "unit": "자연재해",
-          "uc": "#D4A017",
-          "content": "자연재해 대비와 대응 방법",
-          "ytq": "자연재해 대비 대응 예보 대피",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["땅속 에너지가 방출되어 땅이 흔들리는 자연재해는?",["지진","화재","감염병","정전"],0],
-              ["마그마가 지표로 분출하는 자연재해는?",["화산 활동","지진","홍수","폭설"],0],
-              ["비가 오랫동안 오지 않아 물이 부족한 재해는?",["홍수","가뭄","지진","화산"],1],
-              ["지진 발생 시 실내에서 올바른 행동은?",["튼튼한 책상 아래로 몸을 보호한다","엘리베이터를 이용한다","창가로 이동한다","뛰어다닌다"],0],
-              ["자연재해 피해를 줄이기 위한 노력으로 알맞은 것은?",["예보와 대피 훈련","무시하기","건물 부실 시공","경보 끄기"],0],
-              ["개인 사이의 다툼(돈 빌림 등)을 해결하는 재판은?",["민사 재판","형사 재판","행정 재판","선거"],0],
-              ["사회 질서 유지와 함께 법이 추구하는 목적은?",["정의 실현","이윤 추구","권력 독점","오락"],0],
-              ["헌법·형법처럼 국가와 관련된 법은 어디에 속하나요?",["공법","사법","사회법","관습법"],0],
-              ["노동자를 보호하는 근로기준법 등은 어디에 속하나요?",["사회법","공법","사법","형법"],0],
-              ["법을 어겼을 때 국가로부터 받게 되는 것은?",["제재(처벌)","상","칭찬","무시"],0]
-            ]
-          }
-        },
-        {
-          "n": 11,
-          "unit": "자원과 갈등",
-          "uc": "#6E8B45",
-          "content": "자원의 의미와 특성, 자원의 분포",
-          "ytq": "자원 특성 편재성 분포 지하자원"
-        },
-        {
-          "n": 12,
-          "unit": "자원과 갈등",
-          "uc": "#6E8B45",
-          "content": "자원을 둘러싼 경쟁과 갈등, 지속가능한 이용",
-          "ytq": "자원을 둘러싼 경쟁과 갈등 지속가능",
-          "quiz": {
-            "kind": "unit",
-            "z": [
-              ["땅속에서 얻으며 양이 한정된 자원은?",["재생 자원","지하자원","인적 자원","무한 자원"],1],
-              ["자원이 특정 지역에 치우쳐 분포하는 특성은?",["편재성","무한성","균등성","재생성"],0],
-              ["전기·연료로 쓰이며 갈등이 잦은 에너지 자원은?",["석유","모래","공기","흙"],0],
-              ["다음 중 재생 가능 에너지는?",["석탄","석유","태양광","천연가스"],2],
-              ["자원을 지속가능하게 이용하는 방법은?",["절약과 재생에너지 개발","무조건 많이 사용","독점","낭비"],0],
-              ["물·바람·햇빛처럼 계속 다시 쓸 수 있는 자원은?",["재생 자원","화석 연료","지하자원","광물"],0],
-              ["오늘날 가장 많이 쓰이는 화석 연료로, 갈등이 잦은 것은?",["석유","태양","바람","물"],0],
-              ["자원이 특정 지역에 몰려 있어 생기는 문제는?",["자원을 둘러싼 갈등","인구 감소","기후 안정","문화 교류"],0],
-              ["바람의 힘으로 전기를 만드는 발전은?",["풍력 발전","화력 발전","원자력 발전","석탄 발전"],0],
-              ["미래 세대를 생각해 자원을 아껴 쓰는 것을 무엇이라 하나요?",["지속가능한 이용","무한 개발","대량 소비","독점"],0]
-            ]
-          }
-        },
-        {
-          "n": 13,
-          "unit": "복습",
-          "uc": "#8A8A7A",
-          "content": "취약 단원 다시 보기 + 오답노트 정리",
-          "ytq": "중1 사회 1학기 총정리 오답"
-        },
-        {
-          "n": 14,
-          "unit": "총정리",
-          "uc": "#4E8A3E",
-          "content": "전체 복습 + 모의 확인테스트",
-          "ytq": "중1 사회 1학기 총정리 문제",
-          "quiz": {
-            "kind": "mock",
-            "z": [
-              ["적도를 기준으로 남북의 위치를 나타내는 좌표는?",["경도","위도","해발","방위"],1],
-              ["사계절이 비교적 뚜렷한 기후는?",["열대","온대","한대","건조"],1],
-              ["석회암이 녹아 만들어진 지형은?",["삼각주","카르스트","화산","사구"],1],
-              ["각 문화를 그 사회의 입장에서 이해하는 태도는?",["문화 상대주의","자문화 중심주의","문화 사대주의","편견"],0],
-              ["마그마가 지표로 분출하는 재해는?",["지진","홍수","화산 활동","가뭄"],2],
-              ["자원이 한곳에 치우쳐 분포하는 특성은?",["편재성","무한성","균등성","재생성"],0],
-              ["위도 0°에 해당하는 선은?",["적도","본초 자오선","회귀선","날짜 변경선"],0],
-              ["다음 중 재생 가능 에너지는?",["석탄","석유","태양광","천연가스"],2],
-              ["개인 사이의 다툼을 해결하는 재판은?",["민사 재판","형사 재판","행정 재판","선거"],0],
-              ["계속 다시 쓸 수 있는 자원은?",["재생 자원","석유","석탄","천연가스"],0]
-            ]
-          }
-        }
-      ]
-    }
+    { key:"kor", name:"국어", ytg:"중1 2학기 국어", days:[
+      { n:1, unit:"문법·품사", uc:"#7C6BD4", content:"품사의 종류와 특성 (9품사)", ytq:"품사 9품사 명사 동사 형용사" },
+      { n:2, unit:"어휘", uc:"#E0662B", content:"어휘의 체계와 양상 (고유어·한자어·외래어, 유의어·반의어)", ytq:"어휘 고유어 한자어 외래어 유의어 반의어" },
+      { n:3, unit:"주장하는 글", uc:"#6E8B45", content:"주장하는 글 — 주장과 근거, 근거의 타당성", ytq:"주장하는 글 주장 근거 타당성" },
+      { n:4, unit:"매체 읽기", uc:"#1FA3A3", content:"매체 자료 읽기 — 매체의 특성과 신뢰성 판단", ytq:"매체 읽기 신뢰성 판단" },
+      { n:5, unit:"토의·토론", uc:"#C4557A", content:"토의와 토론 — 협력적 문제 해결, 주장과 반론", ytq:"토의 토론 주장 반론" },
+      { n:6, unit:"총정리", uc:"#4E8A3E", content:"국어 2학기 단원 확인문제 (20문항)", ytq:"중1 2학기 국어 총정리 문제", quiz:{kind:"unit", z:[
+        ["사람·사물·장소의 이름을 나타내는 품사는?",["명사","동사","형용사","부사"],0],
+        ["움직임을 나타내는 품사는?",["명사","동사","관형사","조사"],1],
+        ["우리말 품사는 모두 몇 개인가요?",["7개","9개","5개","12개"],1],
+        ["'나, 너, 이것'처럼 명사를 대신하는 품사는?",["대명사","수사","감탄사","조사"],0],
+        ["'컴퓨터, 버스'처럼 외국에서 들어와 우리말처럼 쓰이는 말은?",["고유어","한자어","외래어","방언"],2],
+        ["'하늘, 바람'처럼 예부터 우리말에 있던 말은?",["고유어","한자어","외래어","전문어"],0],
+        ["'크다 ↔ 작다'처럼 뜻이 반대인 낱말 관계는?",["유의어","반의어","상의어","다의어"],1],
+        ["'기쁘다 - 즐겁다'처럼 뜻이 비슷한 낱말 관계는?",["유의어","반의어","동음이의어","상의어"],0],
+        ["글쓴이가 내세우는 의견을 뜻하는 말은?",["주장","근거","예시","서론"],0],
+        ["주장을 뒷받침하는 까닭이나 자료는?",["근거","주장","제목","비유"],0],
+        ["좋은 근거의 조건으로 알맞은 것은?",["주장과 관련 있고 믿을 만함","길기만 하면 됨","재미있으면 됨","어려우면 됨"],0],
+        ["주장하는 글의 짜임으로 알맞은 것은?",["서론-본론-결론","발단-전개-결말","기승전결만","처음만"],0],
+        ["신문·인터넷·텔레비전처럼 정보를 전달하는 수단은?",["매체","주제","갈등","운율"],0],
+        ["매체 자료를 읽을 때 가장 중요하게 따져야 할 것은?",["내용의 신뢰성","글자 크기","색깔","길이"],0],
+        ["믿을 만한 매체 정보의 특징은?",["출처가 분명하다","자극적이다","익명이다","근거가 없다"],0],
+        ["광고를 볼 때 주의할 점으로 알맞은 것은?",["과장·거짓 정보를 판단한다","무조건 믿는다","그대로 산다","따라 한다"],0],
+        ["여러 사람이 협력해 문제 해결책을 찾는 말하기는?",["토의","토론","발표","낭독"],0],
+        ["찬성·반대로 나뉘어 근거를 들어 겨루는 말하기는?",["토의","토론","대화","연설"],1],
+        ["토론에서 상대의 주장을 반박하는 말하기는?",["반론","사회","요약","입론"],0],
+        ["바람직한 토의·토론 태도는?",["상대를 존중하며 근거를 들어 말한다","큰 소리로 우긴다","인신공격한다","무시한다"],0]]}}
+    ]},
+
+    { key:"sci", name:"과학", ytg:"중1 2학기 과학", days:[
+      { n:1, unit:"기체의 성질", uc:"#7C6BD4", content:"입자의 운동과 확산·증발", ytq:"기체의 성질 입자 운동 확산 증발" },
+      { n:2, unit:"기체의 성질", uc:"#7C6BD4", content:"압력과 부피(보일 법칙), 온도와 부피(샤를 법칙)", ytq:"보일 법칙 샤를 법칙 압력 부피 온도" },
+      { n:3, unit:"상태 변화", uc:"#1FA3A3", content:"물질의 상태 변화 — 융해·응고·기화·액화·승화", ytq:"물질의 상태 변화 융해 응고 기화 액화 승화" },
+      { n:4, unit:"상태 변화", uc:"#1FA3A3", content:"상태 변화와 열에너지(흡수·방출)", ytq:"상태 변화 열에너지 흡수 방출" },
+      { n:5, unit:"빛과 파동", uc:"#E0662B", content:"빛의 합성·색, 반사·굴절, 파동과 소리", ytq:"빛과 파동 빛의 삼원색 반사 굴절 소리" },
+      { n:6, unit:"총정리", uc:"#4E8A3E", content:"과학 2학기 단원 확인문제 (20문항)", ytq:"중1 2학기 과학 총정리 문제", quiz:{kind:"unit", z:[
+        ["기체 입자의 운동으로 옳은 것은?",["끊임없이 스스로 움직인다","정지해 있다","서로 붙어 있다","모양이 고정되어 있다"],0],
+        ["향수 냄새가 방 안에 퍼지는 것처럼 입자가 스스로 퍼지는 현상은?",["확산","응고","융해","부력"],0],
+        ["액체 표면에서 입자가 기체로 되어 날아가는 현상은?",["증발","확산","응결","끓음"],0],
+        ["온도가 높아지면 확산과 증발은 어떻게 되나요?",["빨라진다","느려진다","멈춘다","변화 없다"],0],
+        ["온도가 일정할 때 압력이 커지면 기체의 부피는?",["커진다","작아진다","변화 없다","사라진다"],1],
+        ["압력이 일정할 때 온도가 높아지면 기체의 부피는?",["작아진다","커진다","없어진다","일정하다"],1],
+        ["압력과 부피의 관계를 나타낸 법칙은?",["보일 법칙","샤를 법칙","옴 법칙","뉴턴 법칙"],0],
+        ["온도와 부피의 관계를 나타낸 법칙은?",["보일 법칙","샤를 법칙","훅 법칙","쿨롱 법칙"],1],
+        ["고체가 액체로 변하는 현상은?",["융해","응고","기화","승화"],0],
+        ["액체가 기체로 변하는 현상은?",["액화","기화","승화","융해"],1],
+        ["기체가 액체로 변하는 현상은?",["기화","액화","응고","융해"],1],
+        ["고체가 바로 기체로 변하는 현상(드라이아이스)은?",["융해","승화","응고","액화"],1],
+        ["얼음이 녹을 때(융해) 열에너지는 어떻게 되나요?",["흡수한다","방출한다","변화 없다","사라진다"],0],
+        ["수증기가 물이 될 때(액화) 열에너지는 어떻게 되나요?",["흡수한다","방출한다","변화 없다","생성한다"],1],
+        ["상태 변화가 일어나도 변하지 않는 것은?",["물질의 질량","부피","상태","모양"],0],
+        ["상태 변화가 일어나는 동안 온도는?",["일정하게 유지된다","계속 올라간다","계속 내려간다","0이 된다"],0],
+        ["빛의 삼원색으로 알맞은 것은?",["빨강·초록·파랑","빨강·노랑·파랑","검정·흰색·회색","빨강·초록·노랑"],0],
+        ["거울처럼 빛이 부딪혀 되돌아 나오는 현상은?",["굴절","반사","분산","흡수"],1],
+        ["빛이 다른 물질로 들어갈 때 꺾이는 현상은?",["반사","굴절","직진","흡수"],1],
+        ["소리가 전달되려면 반드시 필요한 것은?",["매질","진공","거울","빛"],0]]}}
+    ]},
+
+    { key:"soc", name:"사회", ytg:"중1 2학기 사회", days:[
+      { n:1, unit:"개인과 사회", uc:"#6E8B45", content:"사회화와 사회화 기관, 지위와 역할", ytq:"사회화 지위 역할 귀속 성취" },
+      { n:2, unit:"문화의 이해", uc:"#C4557A", content:"문화의 다양성과 문화 이해 태도(상대주의)", ytq:"문화 다양성 문화 상대주의 자문화 중심주의" },
+      { n:3, unit:"민주주의", uc:"#7C6BD4", content:"정치와 민주주의 — 국민 주권, 권력 분립", ytq:"민주주의 국민 주권 권력 분립" },
+      { n:4, unit:"정치 과정", uc:"#1FA3A3", content:"정치 과정과 시민 참여(정당·선거·언론)", ytq:"정치 과정 정당 선거 언론 시민 참여" },
+      { n:5, unit:"일상생활과 법", uc:"#D4A017", content:"법의 의미와 종류, 재판, 인권과 헌법", ytq:"법의 종류 공법 사법 사회법 재판 헌법" },
+      { n:6, unit:"총정리", uc:"#4E8A3E", content:"사회 2학기 단원 확인문제 (20문항)", ytq:"중1 2학기 사회 총정리 문제", quiz:{kind:"unit", z:[
+        ["사람이 사회 속에서 규범·행동을 배워 가는 과정은?",["사회화","산업화","도시화","세계화"],0],
+        ["사회 속에서 개인이 차지하는 위치는?",["지위","역할","규범","집단"],0],
+        ["태어나면서 저절로 갖게 되는 지위(예: 아들)는?",["귀속 지위","성취 지위","역할","직업"],0],
+        ["노력해서 얻는 지위(예: 학급 회장)는?",["귀속 지위","성취 지위","자연 지위","역할"],1],
+        ["각 문화를 그 사회의 입장에서 이해하려는 태도는?",["문화 상대주의","자문화 중심주의","문화 사대주의","편견"],0],
+        ["자기 문화만 최고라 여기는 태도는?",["문화 상대주의","자문화 중심주의","다문화주의","관용"],1],
+        ["다른 문화를 무조건 좋게 여기는 태도는?",["문화 사대주의","상대주의","중심주의","존중"],0],
+        ["문화의 특징으로 알맞은 것은?",["후천적으로 학습된다","타고난다","전혀 변하지 않는다","개인만의 것이다"],0],
+        ["나라의 주인이 국민이라는 원리는?",["국민 주권","왕권신수","세습","독재"],0],
+        ["국가 권력을 나누어 서로 견제하게 하는 원리는?",["권력 분립","권력 집중","세습","독점"],0],
+        ["대표를 뽑아 정치를 맡기는 제도는?",["대의 민주주의","직접 왕정","독재","무정부"],0],
+        ["민주주의가 추구하는 근본 가치는?",["인간의 존엄성","이윤","권력","속도"],0],
+        ["법을 만드는 국가 기관은?",["국회","정부","법원","헌법재판소"],0],
+        ["정치적 견해가 같은 사람들이 권력 획득을 위해 만든 단체는?",["정당","법원","정부","가족"],0],
+        ["여론 형성에 큰 역할을 하는 정치 주체는?",["언론","군대","은행","병원"],0],
+        ["민주 선거의 4대 원칙이 아닌 것은?",["보통 선거","평등 선거","직접 선거","공개 선거"],3],
+        ["사회 질서 유지를 위해 국가가 만든 강제성 있는 규범은?",["법","도덕","관습","유행"],0],
+        ["개인과 개인 사이의 관계를 다루는 법은?",["공법","사법","사회법","국제법"],1],
+        ["사회적 약자 보호를 위한 법(노동법 등)은?",["공법","사법","사회법","형법"],2],
+        ["국민의 기본권을 보장하는 국가 최고의 법은?",["헌법","민법","형법","조례"],0]]}}
+    ]},
+
+    { key:"his", name:"국사", ytg:"중1 역사 한국사", days:[
+      { n:1, unit:"선사·고조선", uc:"#A5713B", content:"구석기·신석기 시대와 고조선의 성립", ytq:"구석기 신석기 고조선 단군" },
+      { n:2, unit:"여러 나라", uc:"#B5842F", content:"철기 문화와 여러 나라의 성장 (부여·고구려·삼한 등)", ytq:"부여 고구려 옥저 동예 삼한 여러 나라" },
+      { n:3, unit:"삼국의 성립", uc:"#E0662B", content:"삼국(고구려·백제·신라)과 가야의 성립과 발전", ytq:"삼국 성립 고구려 백제 신라 가야" },
+      { n:4, unit:"삼국의 문화", uc:"#C4557A", content:"삼국의 문화와 대외 교류 (불교·고분·일본 전파)", ytq:"삼국 문화 불교 고분 벽화 일본 전파" },
+      { n:5, unit:"남북국", uc:"#2E7D8A", content:"통일 신라와 발해 (남북국 시대)", ytq:"통일 신라 발해 남북국 시대 불국사" },
+      { n:6, unit:"총정리", uc:"#4E8A3E", content:"국사(한국사) 단원 확인문제 (20문항)", ytq:"중1 한국사 총정리 문제 선사 삼국", quiz:{kind:"unit", z:[
+        ["뗀석기(주먹도끼)를 쓰고 사냥·채집을 하던 시대는?",["구석기 시대","신석기 시대","청동기 시대","철기 시대"],0],
+        ["농사를 짓기 시작하고 간석기·빗살무늬 토기를 쓴 시대는?",["구석기 시대","신석기 시대","청동기 시대","철기 시대"],1],
+        ["우리 역사상 최초의 국가는?",["고조선","고구려","신라","백제"],0],
+        ["고조선의 건국 이야기에 나오는 인물은?",["단군왕검","주몽","박혁거세","온조"],0],
+        ["12월에 '영고'라는 제천 행사를 지낸 나라는?",["부여","옥저","동예","삼한"],0],
+        ["'소도'라는 신성 지역이 있고 벼농사가 발달한 남쪽 나라들은?",["부여","고구려","삼한","동예"],2],
+        ["여러 나라가 세워진 시기의 공통점으로 알맞은 것은?",["철기 문화를 바탕으로 성장","문자가 없었다","농사를 짓지 않았다","왕이 없었다"],0],
+        ["'무천'이라는 제천 행사를 지낸 나라는?",["동예","부여","백제","신라"],0],
+        ["주몽이 세운 나라는?",["고구려","백제","신라","가야"],0],
+        ["온조가 한강 유역에 세운 나라는?",["고구려","백제","신라","가야"],1],
+        ["박혁거세가 세운 나라는?",["고구려","백제","신라","가야"],2],
+        ["낙동강 유역에서 철 생산으로 유명했던 여러 작은 나라들은?",["가야","발해","고려","조선"],0],
+        ["삼국이 받아들여 사상을 통합하고 왕권을 강화한 종교는?",["불교","이슬람교","크리스트교","힌두교"],0],
+        ["고구려의 무덤 벽화로 유명한 문화유산은?",["고분 벽화","석굴암","첨성대","팔만대장경"],0],
+        ["백제가 일본에 전해 준 것으로 알맞은 것은?",["불교와 학문·기술","화약","나침반","금속활자"],0],
+        ["신라의 천문 관측 시설로 알려진 것은?",["첨성대","석굴암","불국사","성덕대왕신종"],0],
+        ["삼국을 통일한 나라는?",["신라","백제","고구려","가야"],0],
+        ["통일 신라의 대표적인 불교 문화유산은?",["불국사와 석굴암","고분 벽화","첨성대","팔만대장경"],0],
+        ["고구려 유민 대조영이 세워 '해동성국'이라 불린 나라는?",["발해","가야","고려","조선"],0],
+        ["통일 신라와 발해가 함께 있던 시기를 무엇이라 하나요?",["남북국 시대","삼국 시대","후삼국 시대","고려 시대"],0]]}}
+    ]},
+
+    { key:"mat", name:"수학", ytg:"중1 2학기 수학", days:[
+      { n:1, unit:"기본 도형", uc:"#3B82C4", content:"점·선·면·각, 위치 관계, 평행선의 성질", ytq:"기본 도형 점 선 면 각 위치 관계 평행선" },
+      { n:2, unit:"작도와 합동", uc:"#7C6BD4", content:"삼각형의 작도, 삼각형의 합동 조건", ytq:"작도 삼각형의 합동 조건 SSS SAS ASA" },
+      { n:3, unit:"평면도형", uc:"#1FA3A3", content:"다각형(내각·외각), 원과 부채꼴", ytq:"다각형 내각 외각 원과 부채꼴 넓이" },
+      { n:4, unit:"입체도형", uc:"#E0662B", content:"다면체와 회전체, 겉넓이와 부피", ytq:"입체도형 다면체 회전체 겉넓이 부피" },
+      { n:5, unit:"통계", uc:"#C4557A", content:"도수분포표, 히스토그램, 상대도수", ytq:"통계 도수분포표 히스토그램 상대도수" },
+      { n:6, unit:"총정리", uc:"#4E8A3E", content:"수학 2학기 단원 확인문제 (20문항)", ytq:"중1 2학기 수학 총정리 문제", quiz:{kind:"unit", z:[
+        ["도형의 기본 요소가 아닌 것은?",["점","선","면","무게"],3],
+        ["한 점에서 시작하여 한쪽으로만 끝없이 뻗은 선은?",["직선","반직선","선분","곡선"],1],
+        ["두 반직선이 한 점에서 만나 이루는 도형은?",["각","원","삼각형","평면"],0],
+        ["크기가 90도인 각을 무엇이라 하나요?",["예각","직각","둔각","평각"],1],
+        ["눈금 없는 자와 컴퍼스만으로 도형을 그리는 것은?",["작도","측정","계산","증명"],0],
+        ["두 도형이 모양과 크기가 완전히 같아 포개어지는 관계는?",["합동","닮음","대칭","평행"],0],
+        ["삼각형의 합동 조건이 아닌 것은?",["SSS","SAS","ASA","AAA"],3],
+        ["합동인 두 도형에서 서로 대응하는 변의 길이는?",["같다","다르다","두 배","절반"],0],
+        ["삼각형의 세 내각의 크기의 합은?",["180도","360도","90도","270도"],0],
+        ["사각형의 네 내각의 크기의 합은?",["180도","360도","90도","540도"],1],
+        ["다각형의 외각의 크기의 합은?",["360도","180도","720도","계산 불가"],0],
+        ["부채꼴의 넓이는 무엇에 비례하나요?",["중심각의 크기","색깔","이름","반지름의 이름"],0],
+        ["다면체 중 옆면이 모두 삼각형인 것은?",["각기둥","각뿔","원기둥","구"],1],
+        ["직사각형을 한 변을 축으로 하여 돌리면 생기는 입체도형은?",["원기둥","원뿔","구","각뿔"],0],
+        ["정다면체는 모두 몇 종류인가요?",["5종류","4종류","6종류","무수히 많다"],0],
+        ["구의 겉면 위의 모든 점은 중심에서의 거리가?",["모두 같다","모두 다르다","점점 커진다","0이다"],0],
+        ["자료를 일정한 간격의 구간(계급)으로 나누어 정리한 표는?",["도수분포표","비례식","함수표","곱셈표"],0],
+        ["도수분포표를 막대 모양의 그래프로 나타낸 것은?",["히스토그램","원그래프","꺾은선그래프","그림그래프"],0],
+        ["각 계급의 도수가 전체에서 차지하는 비율은?",["상대도수","계급값","평균","중앙값"],0],
+        ["상대도수의 총합은 얼마인가요?",["1","0","100","10"],0]]}}
+    ]}
   ];
 
   var YT = "https://www.youtube.com/results?search_query=";
-  var KEY = "chwisabyeong_plan_v4";
+  var KEY = "chwisabyeong_s2_v1";
   var ROLE_KEY = "chwisabyeong_role";
-  var BLOB = "https://jsonblob.com/api/jsonBlob/019fe8d2-e08a-7e9b-9724-e2514d3635e5";
   var role = null;
   function isStudent(){ return role === "student"; }
 
-  var DEF = { rDay:40, rQuiz:60, rMock:120, goal:3000 };
+  // ===== 클라우드(3인 실시간): Firebase 연결 시 켜짐. 비어 있으면 '이 기기 저장'(local-first) =====
+  var FIREBASE_DB = ""; // 예: "https://xxxx-default-rtdb.firebaseio.com"
+  var CLOUD = FIREBASE_DB ? (FIREBASE_DB.replace(/\/+$/,"") + "/hanyunjae_s2.json") : "";
+
+  var DEF = { rDay:20, rQuiz:80, rMock:80, goal:1000 };
   var state = load();
   function load() {
     try { var raw = localStorage.getItem(KEY); if (raw) { var s = JSON.parse(raw); return normalize(s); } } catch (e) {}
@@ -989,22 +519,22 @@
     if (isStudent()) scheduleCloud();
   }
 
-  // ===== 클라우드 실시간 동기화 (jsonblob) =====
   function cloudGet() {
-    return fetch(BLOB, { headers:{ "Accept":"application/json" }, cache:"no-store" })
-      .then(function(r){ return r.ok ? r.json() : null; })
-      .catch(function(){ return null; });
+    if (!CLOUD) return Promise.resolve(null);
+    return fetch(CLOUD, { cache:"no-store" }).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; });
   }
   var cloudTimer;
-  function scheduleCloud(){ clearTimeout(cloudTimer); cloudTimer = setTimeout(cloudPut, 700); }
+  function scheduleCloud(){ if(!CLOUD){ setSync("local"); return; } clearTimeout(cloudTimer); cloudTimer = setTimeout(cloudPut, 700); }
   function cloudPut(){
-    state.v = 4; state.updatedAt = Date.now(); setSync("saving");
-    fetch(BLOB, { method:"PUT", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(state) })
+    if (!CLOUD) { setSync("local"); return; }
+    state.updatedAt = Date.now(); setSync("saving");
+    fetch(CLOUD, { method:"PUT", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(state) })
       .then(function(r){ setSync(r.ok ? "ok" : "err"); })
       .catch(function(){ setSync("err"); });
   }
   function setSync(s){
     var el = document.getElementById("syncState"); if(!el) return;
+    if (!CLOUD) { el.textContent = "💾 이 기기에 저장됨"; el.className = "syncstate local"; return; }
     el.textContent = s==="saving" ? "저장 중…" : s==="err" ? "⚠ 오프라인" : "☁ 동기화됨";
     el.className = "syncstate " + s;
   }
@@ -1015,7 +545,6 @@
     if(state.log.length > 30) state.log = state.log.slice(-30);
   }
 
-  // build quiz lookup + counts
   var QUIZ = {}, unitQuizIds = [], mockQuizIds = [], TOTAL_DAYS = 0, DAY_LABEL = {};
   SUBJECTS.forEach(function (sub) {
     sub.days.forEach(function (d) {
@@ -1025,7 +554,7 @@
       if (d.quiz) {
         var qid = sub.key + "-q" + d.n;
         d.quizId = qid;
-        QUIZ[qid] = { title: sub.name + " · " + d.unit + (d.quiz.kind==="mock"?" 모의테스트":" 확인문제"), kind: d.quiz.kind, z: d.quiz.z, yt: ytHref(sub, d) };
+        QUIZ[qid] = { title: sub.name + " 단원 확인문제", kind: d.quiz.kind, z: d.quiz.z, yt: ytHref(sub, d) };
         if (d.quiz.kind==="mock") mockQuizIds.push(qid); else unitQuizIds.push(qid);
       }
     });
@@ -1040,7 +569,7 @@
   var lastRank = -1, lastGoalReached = false;
 
   function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-  function ytHref(sub, d){ return YT + encodeURIComponent("중1 1학기 " + sub.name + " " + d.ytq); }
+  function ytHref(sub, d){ return YT + encodeURIComponent(sub.ytg + " " + d.ytq); }
 
   function renderTabs() {
     var el = document.getElementById("tabs"); el.innerHTML = "";
@@ -1048,7 +577,7 @@
       var done = sub.days.filter(function (d){ return state.days[d.dayId]; }).length;
       var b = document.createElement("button");
       b.className = "tab" + (sub.key===activeTab ? " active" : "");
-      b.innerHTML = (sub.key===activeTab?'<span class="bar"></span>':'') + sub.name + '<span class="cnt">' + done + '/14</span>';
+      b.innerHTML = (sub.key===activeTab?'<span class="bar"></span>':'') + sub.name + '<span class="cnt">' + done + '/' + sub.days.length + '</span>';
       b.addEventListener("click", function(){ activeTab = sub.key; renderTabs(); renderPlan(); });
       el.appendChild(b);
     });
@@ -1065,12 +594,11 @@
       var done = !!state.days[d.dayId];
       var acts = '<a class="yt" target="_blank" rel="noopener" href="' + ytHref(sub,d) + '">' + YTSVG + '유튜브</a>';
       if (d.quizId) {
-        var passed = !!state.quiz[d.quizId], mock = d.quiz.kind==="mock";
+        var passed = !!state.quiz[d.quizId];
         var star = state.perfect[d.quizId] ? " ⭐" : "";
-        var lbl = mock ? "모의 확인테스트" : "확인문제";
         var sc = passed ? " · " + (state.score[d.quizId]||0) + "점" : "";
-        acts += '<button class="quizbtn' + (mock?' mock':'') + (passed?' passed':'') + '"' + (ro?' disabled':'') + ' data-quiz="' + d.quizId + '">' +
-          (passed?'✓ ':'📝 ') + lbl + sc + star + '</button>';
+        acts += '<button class="quizbtn' + (passed?' passed':'') + '"' + (ro?' disabled':'') + ' data-quiz="' + d.quizId + '">' +
+          (passed?'✓ 확인문제':'📝 확인문제') + sc + star + '</button>';
       }
       html += '<div class="day' + (done?' done':'') + '">' +
         '<div class="day-n"><span class="d">DAY</span>' + d.n + '</div>' +
@@ -1114,7 +642,7 @@
     var wrap = document.createElement("div");
 
     var head = document.createElement("div"); head.className = "modal-head";
-    head.innerHTML = '<div><div class="modal-tag">' + (Q.kind==="mock"?"모의 확인테스트":"확인문제") + '</div><h3>' + esc(Q.title) + '</h3></div>';
+    head.innerHTML = '<div><div class="modal-tag">단원 확인문제</div><h3>' + esc(Q.title) + '</h3></div>';
     var x = document.createElement("button"); x.className="close-x"; x.setAttribute("aria-label","닫기"); x.textContent="✕";
     x.addEventListener("click", closeQuiz); head.appendChild(x); wrap.appendChild(head);
 
@@ -1221,8 +749,8 @@
     var reached = earned >= goal && goal > 0;
     document.getElementById("goalCard").classList.toggle("reached", reached);
     document.getElementById("goalPct").innerHTML = reached
-      ? "🎉 목표 달성! <b style='color:var(--good)'>자전거 GET!</b> 남은 확인문제 만점 ⭐도 채워 보자!"
-      : "달성률 <b>" + pct + "%</b> · 자전거까지 <b class='tabnum'>" + (goal-earned) + "</b>元 남았어요!";
+      ? "🎉 목표 달성! <b style='color:var(--good)'>축하해요!</b> 남은 확인문제 만점 ⭐도 채워 보자!"
+      : "달성률 <b>" + pct + "%</b> · 목표까지 <b class='tabnum'>" + (goal-earned) + "</b>元 남았어요!";
 
     var ri = currentRank(e.days), r = RANKS[ri];
     document.getElementById("rankIco").textContent = r.ico;
@@ -1232,7 +760,7 @@
 
     if (lastRank !== -1 && ri > lastRank) setTimeout(function(){ showToast("진급! " + r.ico + " " + r.name + " 달성!"); }, 600);
     lastRank = ri;
-    if (lastGoalReached === false && reached) setTimeout(function(){ showToast("🚲 목표 " + goal + "元 달성! 자전거 GET!"); }, 850);
+    if (lastGoalReached === false && reached) setTimeout(function(){ showToast("🎁 목표 " + goal + "元 달성!"); }, 850);
     lastGoalReached = reached;
   }
 
@@ -1252,11 +780,10 @@
     toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2300);
   }
 
-  var edDay=document.getElementById("edDay"), edQuiz=document.getElementById("edQuiz"),
-      edMock=document.getElementById("edMock"), edGoal=document.getElementById("edGoal");
-  function syncEdit(){ edDay.value=state.rDay; edQuiz.value=state.rQuiz; edMock.value=state.rMock; edGoal.value=state.goal; }
+  var edDay=document.getElementById("edDay"), edQuiz=document.getElementById("edQuiz"), edGoal=document.getElementById("edGoal");
+  function syncEdit(){ edDay.value=state.rDay; edQuiz.value=state.rQuiz; edGoal.value=state.goal; }
   function bindEdit(inp, key){ inp.addEventListener("change", function(){ var v=parseInt(inp.value,10); if(isNaN(v)||v<0)v=0; state[key]=v; save(); renderPlan(); }); }
-  bindEdit(edDay,"rDay"); bindEdit(edQuiz,"rQuiz"); bindEdit(edMock,"rMock"); bindEdit(edGoal,"goal");
+  bindEdit(edDay,"rDay"); bindEdit(edQuiz,"rQuiz"); bindEdit(edGoal,"goal");
   document.getElementById("editBtn").addEventListener("click", function () {
     editMode = !editMode;
     this.classList.toggle("on", editMode);
@@ -1266,12 +793,11 @@
   });
   document.getElementById("resetBtn").addEventListener("click", function () {
     if (confirm("모든 진행상황·점수·용돈 기록을 지우고 처음부터 시작할까요?")) {
-      state = { name:state.name, days:{}, quiz:{}, score:{}, perfect:{}, rDay:state.rDay, rQuiz:state.rQuiz, rMock:state.rMock, goal:state.goal };
+      state = { name:state.name, days:{}, quiz:{}, score:{}, perfect:{}, rDay:state.rDay, rQuiz:state.rQuiz, rMock:state.rMock, goal:state.goal, log:[], updatedAt:0 };
       lastRank=-1; lastGoalReached=false; save(); renderTabs(); renderPlan();
     }
   });
 
-  // ===== 역할 UI & 실시간 보기 =====
   var ROLE_INFO = {
     student: { ico:"🎓", label:"학생 · 한윤재" },
     mom:     { ico:"👩", label:"보호자 · 엄마" },
@@ -1283,10 +809,11 @@
     var info = ROLE_INFO[role] || ROLE_INFO.student;
     el.innerHTML = '<span class="who">' + info.ico + ' ' + info.label + '</span>' +
       (isStudent()
-        ? '<span class="syncstate" id="syncState">☁ 동기화됨</span>'
-        : '<span class="live">🔴 실시간 보기</span>') +
+        ? '<span class="syncstate" id="syncState"></span>'
+        : (CLOUD ? '<span class="live">🔴 실시간 보기</span>' : '<span class="syncstate local">보기 전용</span>')) +
       '<button class="rolebtn" id="switchRole">역할 바꾸기</button>';
     document.getElementById("switchRole").addEventListener("click", showRoleGate);
+    if (isStudent()) setSync(CLOUD ? "ok" : "local");
   }
 
   function applyRoleUI(){
@@ -1295,9 +822,11 @@
     var sub = document.getElementById("subtitle");
     if(sub){
       sub.innerHTML = isStudent()
-        ? '<b style="color:var(--gold)">한윤재</b>의 국어·과학·사회 1학기 완성표 — 매일 영상 보고 <b style="color:var(--good)">완료 체크</b>, 단원 끝엔 <b style="color:var(--flame)">확인문제</b>로 복습! 용돈 모아 자전거 사기 🚲'
-        : '<b style="color:var(--gold)">한윤재</b> 학생의 진행 상황을 <b style="color:var(--flame)">실시간</b>으로 보고 있어요. 아래에서 완료·확인문제·용돈·활동을 확인하세요.';
+        ? '<b style="color:var(--gold)">한윤재</b>의 국어·과학·사회·국사·수학 <b>2학기</b> 완성표 — 매일 영상 보고 <b style="color:var(--good)">완료 체크</b>, 과목 끝엔 <b style="color:var(--flame)">확인문제 20문항</b>! 용돈 모아 목표 달성! 🎁'
+        : '<b style="color:var(--gold)">한윤재</b> 학생의 진행 상황을 보고 있어요. 아래에서 완료·확인문제·용돈·활동을 확인하세요.';
     }
+    var note = document.getElementById("pbNote");
+    if (note) note.textContent = CLOUD ? "한윤재가 완료·확인문제를 통과할 때마다 실시간(약 8초)으로 반영돼요." : "실시간 동기화가 아직 연결되지 않았어요(Firebase 연결 필요). 지금은 한윤재 기기에만 저장됩니다.";
   }
 
   function relTime(t){
@@ -1312,7 +841,7 @@
   function renderActivity(){
     var box = document.getElementById("activityList"); if(!box) return;
     var log = (state.log||[]).slice().reverse().slice(0,12);
-    if(!log.length){ box.innerHTML = '<div class="act-empty">아직 기록된 활동이 없어요. 한윤재가 시작하면 여기에 표시돼요.</div>'; return; }
+    if(!log.length){ box.innerHTML = '<div class="act-empty">아직 기록된 활동이 없어요.</div>'; return; }
     box.innerHTML = log.map(function(ev){
       return '<div class="act"><span class="act-t">' + relTime(ev.t) + '</span><span class="act-x">' + esc(ev.text) + '</span></div>';
     }).join("");
@@ -1320,7 +849,7 @@
 
   function updateBanner(){
     var t = document.getElementById("bannerTime"); if(!t) return;
-    t.textContent = state.updatedAt ? ("마지막 활동: " + relTime(state.updatedAt)) : "연결 대기 중…";
+    t.textContent = state.updatedAt ? ("마지막 활동: " + relTime(state.updatedAt)) : (CLOUD ? "연결 대기 중…" : "");
   }
 
   function renderAll(){ renderTabs(); renderPlan(); if(!isStudent()){ renderActivity(); updateBanner(); } }
@@ -1335,7 +864,7 @@
     });
   }
   function startPolling(){
-    if(pollTimer) return;
+    if(pollTimer || !CLOUD) return;
     pollTimer = setInterval(poll, 8000);
     window.addEventListener("focus", poll);
     document.addEventListener("visibilitychange", function(){ if(!document.hidden) poll(); });
@@ -1357,7 +886,7 @@
     applyRoleUI();
     cloudGet().then(function(c){
       if(isStudent()){
-        // 클라우드가 더 앞설 때만 채택. 아니면 로컬 유지 + 클라우드 재시딩(삭제·리셋 방어)
+        // 클라우드가 더 앞설 때만 채택. 아니면 로컬 유지 + 재시딩(삭제·리셋 방어)
         var cc = (c && typeof c === "object") ? progressScore(normalize(c)) : -1;
         var lc = progressScore(state);
         if(cc > lc){ state = normalize(c); lastUpdatedAt = c.updatedAt; }
@@ -1371,14 +900,12 @@
     });
   }
 
-  // bind role gate + refresh
   Array.prototype.forEach.call(document.querySelectorAll("#roleGate [data-role]"), function(b){
     b.addEventListener("click", function(){ chooseRole(b.getAttribute("data-role")); });
   });
   var pbRefresh = document.getElementById("pbRefresh");
   if(pbRefresh) pbRefresh.addEventListener("click", poll);
 
-  // start
   try{ role = localStorage.getItem(ROLE_KEY); }catch(e){}
   if(role==="student" || role==="mom" || role==="dad"){ enterApp(); }
   else { showRoleGate(); }
