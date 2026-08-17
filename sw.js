@@ -1,5 +1,5 @@
 /* 한윤재 완성작전 — 오프라인 캐시 서비스워커 */
-const CACHE = 'study-quest-v10';
+const CACHE = 'study-quest-v11';
 const ASSETS = [
   './',
   'index.html',

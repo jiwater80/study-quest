@@ -1313,7 +1313,7 @@
   function isStudent(){ return role === "student"; }
 
   // ===== 클라우드(3인 실시간): Firebase 연결 시 켜짐. 비어 있으면 '이 기기 저장'(local-first) =====
-  var FIREBASE_DB = ""; // 예: "https://xxxx-default-rtdb.firebaseio.com"
+  var FIREBASE_DB = "https://learning-soyun-default-rtdb.firebaseio.com"; // 예: "https://xxxx-default-rtdb.firebaseio.com"
   var CLOUD = FIREBASE_DB ? (FIREBASE_DB.replace(/\/+$/,"") + "/hanyunjae_s2.json") : "";
 
   var DEF = { rDay:5, rQuiz:25, rMock:30, goal:1000 };
